@@ -1761,7 +1761,7 @@ s32 update_behind_mario_camera(struct Camera *c, Vec3f focus, Vec3f pos) {
     s16 yawSpeed;
     s16 pitchInc = 32;
     UNUSED u8 filler3[12];
-    f32 maxDist = 80.f;//800.f;
+    f32 maxDist = 800.f;
     f32 focYOff = 125.f;
 
     // Zoom in when Mario R_TRIG mode is active
@@ -1824,10 +1824,11 @@ s32 update_behind_mario_camera(struct Camera *c, Vec3f focus, Vec3f pos) {
     //! @bug C-Right and C-Up take precedence due to the way input is handled here
 
     // Rotate right
+    maxDist = 80.f;
     if (sCButtonsPressed & L_CBUTTONS) {
-        //if (gPlayer1Controller->buttonPressed & L_CBUTTONS) {
-        //    play_sound_cbutton_side();
-        //}
+        if (gPlayer1Controller->buttonPressed & L_CBUTTONS) {
+            play_sound_cbutton_side();
+        }
         if (dist < maxDist) {
             camera_approach_f32_symmetric_bool(&dist, maxDist, 5.f);
         }
@@ -1837,9 +1838,9 @@ s32 update_behind_mario_camera(struct Camera *c, Vec3f focus, Vec3f pos) {
     }
     // Rotate left
     if (sCButtonsPressed & R_CBUTTONS) {
-        //if (gPlayer1Controller->buttonPressed & R_CBUTTONS) {
-        //    play_sound_cbutton_side();
-        //}
+        if (gPlayer1Controller->buttonPressed & R_CBUTTONS) {
+            play_sound_cbutton_side();
+        }
         if (dist < maxDist) {
             camera_approach_f32_symmetric_bool(&dist, maxDist, 5.f);
         }
