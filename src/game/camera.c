@@ -5021,7 +5021,8 @@ void handle_c_button_movement(struct Camera *c) {
 
         // Rotate left or right
         cSideYaw = 0x0500;//0x1000; //this is how much you rotate the camera by, every time you press a side c button
-        if (gPlayer1Controller->buttonPressed & R_CBUTTONS) {
+        //if (gPlayer1Controller->buttonPressed & R_CBUTTONS) {
+		if (sCButtonsPressed & R_CBUTTONS) {
             //if (gCameraMovementFlags & CAM_MOVE_ROTATE_LEFT) {
             //    gCameraMovementFlags &= ~CAM_MOVE_ROTATE_LEFT;
             //} else {
@@ -5032,7 +5033,8 @@ void handle_c_button_movement(struct Camera *c) {
                 sCSideButtonYaw = -cSideYaw;
             //}
         }
-        if (gPlayer1Controller->buttonPressed & L_CBUTTONS) {
+        //if (gPlayer1Controller->buttonPressed & L_CBUTTONS) {
+		if (sCButtonsPressed & L_CBUTTONS) {
             //if (gCameraMovementFlags & CAM_MOVE_ROTATE_RIGHT) {
             //    gCameraMovementFlags &= ~CAM_MOVE_ROTATE_RIGHT;
             //} else {
