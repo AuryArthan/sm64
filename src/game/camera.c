@@ -2401,7 +2401,7 @@ void mode_lakitu_camera(struct Camera *c) {
  * When no other mode is active and the current R button mode is Mario
  */
 void mode_mario_camera(struct Camera *c) {
-    gCameraZoomDist = 350.f;
+    gCameraZoomDist = 700.f;//350.f; // how close is the close mario cam
     mode_default_camera(c);
 }
 
@@ -3727,6 +3727,9 @@ s32 cam_select_alt_mode(s32 selection) {
  * If `mode` is 2, start Lakitu mode
  */
 s32 set_cam_angle(s32 mode) {
+	mode = CAM_ANGLE_MARIO;
+	return mode;
+	/*
     s32 curMode = CAM_ANGLE_LAKITU;
 
     // Switch to Mario mode
@@ -3753,7 +3756,7 @@ s32 set_cam_angle(s32 mode) {
     if (sSelectionFlags & CAM_MODE_MARIO_ACTIVE) {
         curMode = CAM_ANGLE_MARIO;
     }
-    return curMode;
+    return curMode;*/
 }
 
 /**
