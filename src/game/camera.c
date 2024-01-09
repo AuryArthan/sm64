@@ -1616,7 +1616,7 @@ s32 update_boss_fight_camera(struct Camera *c, Vec3f focus, Vec3f pos) {
     if (gCurrLevelNum == LEVEL_BBH) { pos[1] = 2047.f; }
 
     // Rotate from C-Button input
-    if (sCSideButtonYaw < 0) {
+    if (sCSideButtonYaw < 0) { 
         sModeOffsetYaw += 0x200;
         if ((sCSideButtonYaw += 0x100) > 0) {
             sCSideButtonYaw = 0;
@@ -5020,28 +5020,28 @@ void handle_c_button_movement(struct Camera *c) {
         }
 
         // Rotate left or right
-        cSideYaw = 0x1000;
+        cSideYaw = 0x0500;//0x1000; //this is how much you rotate the camera by, every time you press a side c button
         if (gPlayer1Controller->buttonPressed & R_CBUTTONS) {
-            if (gCameraMovementFlags & CAM_MOVE_ROTATE_LEFT) {
-                gCameraMovementFlags &= ~CAM_MOVE_ROTATE_LEFT;
-            } else {
-                gCameraMovementFlags |= CAM_MOVE_ROTATE_RIGHT;
-                if (sCSideButtonYaw == 0) {
-                    play_sound_cbutton_side();
-                }
+            //if (gCameraMovementFlags & CAM_MOVE_ROTATE_LEFT) {
+            //    gCameraMovementFlags &= ~CAM_MOVE_ROTATE_LEFT;
+            //} else {
+                //gCameraMovementFlags |= CAM_MOVE_ROTATE_RIGHT;
+                //if (sCSideButtonYaw == 0) {
+                //    play_sound_cbutton_side();
+                //}
                 sCSideButtonYaw = -cSideYaw;
-            }
+            //}
         }
         if (gPlayer1Controller->buttonPressed & L_CBUTTONS) {
-            if (gCameraMovementFlags & CAM_MOVE_ROTATE_RIGHT) {
-                gCameraMovementFlags &= ~CAM_MOVE_ROTATE_RIGHT;
-            } else {
-                gCameraMovementFlags |= CAM_MOVE_ROTATE_LEFT;
-                if (sCSideButtonYaw == 0) {
-                    play_sound_cbutton_side();
-                }
+            //if (gCameraMovementFlags & CAM_MOVE_ROTATE_RIGHT) {
+            //    gCameraMovementFlags &= ~CAM_MOVE_ROTATE_RIGHT;
+            //} else {
+                //gCameraMovementFlags |= CAM_MOVE_ROTATE_LEFT;
+                //if (sCSideButtonYaw == 0) {
+                //    play_sound_cbutton_side();
+                //}
                 sCSideButtonYaw = cSideYaw;
-            }
+            //}
         }
     }
 }
