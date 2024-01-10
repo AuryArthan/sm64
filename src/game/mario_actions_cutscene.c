@@ -1164,7 +1164,7 @@ s32 act_death_exit(struct MarioState *m) {
 #if ENABLE_RUMBLE
         queue_rumble_data(5, 80);
 #endif
-        m->numLives--;
+        //m->numLives--;
         // restore 7.75 units of health
         m->healCounter = 31;
     }
@@ -1180,7 +1180,7 @@ s32 act_unused_death_exit(struct MarioState *m) {
 #else
         play_sound(SOUND_MARIO_OOOF2, m->marioObj->header.gfx.cameraToObject);
 #endif
-        m->numLives--;
+        //m->numLives--;
         // restore 7.75 units of health
         m->healCounter = 31;
     }
@@ -1199,7 +1199,7 @@ s32 act_falling_death_exit(struct MarioState *m) {
 #if ENABLE_RUMBLE
         queue_rumble_data(5, 80);
 #endif
-        m->numLives--;
+        //m->numLives--;
         // restore 7.75 units of health
         m->healCounter = 31;
     }
@@ -1246,7 +1246,7 @@ s32 act_special_death_exit(struct MarioState *m) {
 #if ENABLE_RUMBLE
         queue_rumble_data(5, 80);
 #endif
-        m->numLives--;
+        //m->numLives--;
         m->healCounter = 31;
     }
     // show Mario
