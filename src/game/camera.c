@@ -2100,7 +2100,7 @@ s16 update_default_camera(struct Camera *c) {
     if (gCameraMovementFlags & CAM_MOVE_ZOOMED_OUT) {
         //! In Mario mode, the camera is zoomed out further than in Lakitu mode (1400 vs 1200)
         if (set_cam_angle(0) == CAM_ANGLE_MARIO) {
-            zoomDist = gCameraZoomDist + 1050;
+            zoomDist = gCameraZoomDist + 300; //1050; // how much to zoom out camera is zoomed out
         } else {
             zoomDist = gCameraZoomDist + 400;
         }
@@ -3018,11 +3018,11 @@ void update_camera(struct Camera *c) {
         // Only process R_TRIG if 'fixed' is not selected in the menu
         if (cam_select_alt_mode(0) == CAM_SELECTION_MARIO) {
             if (gPlayer1Controller->buttonPressed & R_TRIG) {
-                if (set_cam_angle(0) == CAM_ANGLE_LAKITU) {
-                    set_cam_angle(CAM_ANGLE_MARIO);
-                } else {
-                    set_cam_angle(CAM_ANGLE_LAKITU);
-                }
+                //if (set_cam_angle(0) == CAM_ANGLE_LAKITU) {
+                //    set_cam_angle(CAM_ANGLE_MARIO);
+                //} else {
+                //    set_cam_angle(CAM_ANGLE_LAKITU);
+                //}
             }
         }
         play_sound_if_cam_switched_to_lakitu_or_mario();
@@ -3706,12 +3706,12 @@ s32 cam_select_alt_mode(s32 selection) {
     }
 
     // The alternate mode is up-close, but the player just selected fixed in the pause menu
-    if (selection == CAM_SELECTION_FIXED && (sSelectionFlags & CAM_MODE_MARIO_SELECTED)) {
+    //if (selection == CAM_SELECTION_FIXED && (sSelectionFlags & CAM_MODE_MARIO_SELECTED)) {
         // So change to normal mode in case the user paused in up-close mode
-        set_cam_angle(CAM_ANGLE_LAKITU);
-        sSelectionFlags &= ~CAM_MODE_MARIO_SELECTED;
-        sCameraSoundFlags |= CAM_SOUND_UNUSED_SELECT_FIXED;
-    }
+    //    set_cam_angle(CAM_ANGLE_LAKITU);
+    //    sSelectionFlags &= ~CAM_MODE_MARIO_SELECTED;
+    //    sCameraSoundFlags |= CAM_SOUND_UNUSED_SELECT_FIXED;
+    //}
 
     if (sSelectionFlags & CAM_MODE_MARIO_SELECTED) {
         mode = CAM_SELECTION_MARIO;
@@ -3903,15 +3903,16 @@ s32 find_c_buttons_pressed(u16 currentState, u16 buttonsPressed, u16 buttonsDown
  */
 s32 update_camera_hud_status(struct Camera *c) {
     s16 status = CAM_STATUS_NONE;
-
-    if (c->cutscene != 0
-        || ((gPlayer1Controller->buttonDown & R_TRIG) && cam_select_alt_mode(0) == CAM_SELECTION_FIXED)) {
-        status |= CAM_STATUS_FIXED;
-    } else if (set_cam_angle(0) == CAM_ANGLE_MARIO) {
+	
+	c = c;
+    //if (c->cutscene != 0
+    //    || ((gPlayer1Controller->buttonDown & R_TRIG) && cam_select_alt_mode(0) == CAM_SELECTION_FIXED)) {
+    //    status |= CAM_STATUS_FIXED;
+    //} else if (set_cam_angle(0) == CAM_ANGLE_MARIO) {
         status |= CAM_STATUS_MARIO;
-    } else {
-        status |= CAM_STATUS_LAKITU;
-    }
+    //} else {
+    //    status |= CAM_STATUS_LAKITU;
+    //}
     if (gCameraMovementFlags & CAM_MOVE_ZOOMED_OUT) {
         status |= CAM_STATUS_C_DOWN;
     }
