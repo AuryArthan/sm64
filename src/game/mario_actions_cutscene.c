@@ -1440,9 +1440,9 @@ s32 act_teleport_fade_in(struct MarioState *m) {
     if (m->actionTimer++ == 32) {
         if (m->pos[1] < m->waterLevel - 100) {
             // Check if the camera is not underwater.
-            if (m->area->camera->mode != CAMERA_MODE_WATER_SURFACE) {
-                set_camera_mode(m->area->camera, CAMERA_MODE_WATER_SURFACE, 1);
-            }
+            //if (m->area->camera->mode != CAMERA_MODE_WATER_SURFACE) {
+            //    set_camera_mode(m->area->camera, CAMERA_MODE_WATER_SURFACE, 1);
+            //}
             set_mario_action(m, ACT_WATER_IDLE, 0);
         } else {
             set_mario_action(m, ACT_IDLE, 0);
@@ -2586,9 +2586,9 @@ static s32 act_credits_cutscene(struct MarioState *m) {
     m->statusForCamera->cameraEvent = CAM_EVENT_START_CREDITS;
     // checks if Mario is underwater (JRB, DDD, SA, etc.)
     if (m->pos[1] < m->waterLevel - 100) {
-        if (m->area->camera->mode != CAMERA_MODE_BEHIND_MARIO) {
-            set_camera_mode(m->area->camera, CAMERA_MODE_BEHIND_MARIO, 1);
-        }
+        //if (m->area->camera->mode != CAMERA_MODE_BEHIND_MARIO) {
+        //    set_camera_mode(m->area->camera, CAMERA_MODE_BEHIND_MARIO, 1);
+        //}
         set_mario_animation(m, MARIO_ANIM_WATER_IDLE);
         vec3f_copy(m->marioObj->header.gfx.pos, m->pos);
         // will copy over roll and pitch, if set
