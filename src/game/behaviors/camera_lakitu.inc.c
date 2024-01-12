@@ -11,6 +11,7 @@
  * Spawn cloud if not the intro lakitu.
  */
 void bhv_camera_lakitu_init(void) {
+	obj_mark_for_deletion(o);
 	return ;
 	/*
     if (o->oBhvParams2ndByte != CAMERA_LAKITU_BP_FOLLOW_CAMERA) {
