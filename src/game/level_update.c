@@ -393,7 +393,7 @@ void init_mario_after_warp(void) {
         gMarioState->usedObj = spawnNode->object;
     }
 
-    //reset_camera(gCurrentArea->camera);
+    reset_camera(gCurrentArea->camera);
     sWarpDest.type = WARP_TYPE_NOT_WARPING;
     sDelayedWarpOp = WARP_OP_NONE;
 
@@ -515,7 +515,7 @@ void warp_credits(void) {
 
     set_mario_action(gMarioState, marioAction, 0);
 
-    //reset_camera(gCurrentArea->camera);
+    reset_camera(gCurrentArea->camera);
 
     sWarpDest.type = WARP_TYPE_NOT_WARPING;
     sDelayedWarpOp = WARP_OP_NONE;
@@ -1177,7 +1177,7 @@ s32 init_level(void) {
         }
 
         if (gCurrentArea != NULL) {
-            //reset_camera(gCurrentArea->camera);
+            reset_camera(gCurrentArea->camera);
 
             if (gCurrDemoInput != NULL) {
                 set_mario_action(gMarioState, ACT_IDLE, 0);

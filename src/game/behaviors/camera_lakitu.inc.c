@@ -11,6 +11,8 @@
  * Spawn cloud if not the intro lakitu.
  */
 void bhv_camera_lakitu_init(void) {
+	return ;
+	/*
     if (o->oBhvParams2ndByte != CAMERA_LAKITU_BP_FOLLOW_CAMERA) {
         // Despawn unless this is the very beginning of the game
         if (gNeverEnteredCastle != TRUE) {
@@ -19,6 +21,7 @@ void bhv_camera_lakitu_init(void) {
     } else {
         spawn_object_relative_with_scale(CLOUD_BP_LAKITU_CLOUD, 0, 0, 0, 2.0f, o, MODEL_MIST, bhvCloud);
     }
+    */
 }
 
 /**
@@ -26,14 +29,17 @@ void bhv_camera_lakitu_init(void) {
  * the spawn cloud action.
  */
 static void camera_lakitu_intro_act_trigger_cutscene(void) {
+	return ;
     //! These bounds are slightly smaller than the actual bridge bounds, allowing
     //  the RTA speedrunning method of lakitu skip
+    /*
     if (gMarioObject->oPosX > -544.0f && gMarioObject->oPosX < 545.0f
         && gMarioObject->oPosY > 800.0f && gMarioObject->oPosZ > -2000.0f
         && gMarioObject->oPosZ < -177.0f && gMarioObject->oPosZ < -177.0f // always double check your conditions
         && set_mario_npc_dialog(MARIO_DIALOG_LOOK_UP) == MARIO_DIALOG_STATUS_START) {
         o->oAction = CAMERA_LAKITU_INTRO_ACT_SPAWN_CLOUD;
     }
+    */
 }
 
 /**

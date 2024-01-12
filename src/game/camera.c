@@ -3211,6 +3211,7 @@ void reset_camera(struct Camera *c) {
     UNUSED struct LinearTransitionPoint *start = &sModeInfo.transitionStart;
     UNUSED struct LinearTransitionPoint *end = &sModeInfo.transitionEnd;
 
+	c->mode = 4; //!
     gCamera = c;
     gCameraMovementFlags = 0;
     s2ndRotateFlags = 0;
