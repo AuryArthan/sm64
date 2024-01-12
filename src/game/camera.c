@@ -3697,6 +3697,9 @@ s32 move_point_along_spline(Vec3f p, struct CutsceneSplinePoint spline[], s16 *s
  * @return the current selection
  */
 s32 cam_select_alt_mode(s32 selection) {
+	selection = selection;
+	return CAM_SELECTION_MARIO;
+	/*
     s32 mode = CAM_SELECTION_FIXED;
 
     if (selection == CAM_SELECTION_MARIO) {
@@ -3718,6 +3721,7 @@ s32 cam_select_alt_mode(s32 selection) {
         mode = CAM_SELECTION_MARIO;
     }
     return mode;
+    */
 }
 
 /**
