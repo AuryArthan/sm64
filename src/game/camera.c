@@ -3212,6 +3212,7 @@ void reset_camera(struct Camera *c) {
     UNUSED struct LinearTransitionPoint *end = &sModeInfo.transitionEnd;
 
 	c->mode = 4; //!
+	// there appears to be more than just mode here, entering BOB still switches to Lakitu cam, that is why I commented out the first 'reset_camera()' call in level_update.c
     gCamera = c;
     gCameraMovementFlags = 0;
     s2ndRotateFlags = 0;
@@ -3284,6 +3285,8 @@ void init_camera(struct Camera *c) {
     Vec3f marioOffset;
     s32 i;
 
+	c->mode = 4; //!
+	c->defMode = 4; //!
     sCreditsPlayer2Pitch = 0;
     sCreditsPlayer2Yaw = 0;
     gPrevLevel = gCurrLevelArea / 16;
@@ -3428,9 +3431,9 @@ void init_camera(struct Camera *c) {
     vec3f_copy(gLakituState.goalFocus, c->focus);
     vec3f_copy(gLakituState.pos, c->pos);
     vec3f_copy(gLakituState.focus, c->focus);
-    if (c->mode == CAMERA_MODE_FIXED) {
-        set_fixed_cam_axis_sa_lobby(c->mode);
-    }
+    //if (c->mode == CAMERA_MODE_FIXED) {
+    //   set_fixed_cam_axis_sa_lobby(c->mode);
+    //}
     store_lakitu_cam_info_for_c_up(c);
     gLakituState.yaw = calculate_yaw(c->focus, c->pos);
     gLakituState.nextYaw = gLakituState.yaw;
@@ -5516,7 +5519,7 @@ s32 set_camera_mode_fixed(struct Camera *c, s16 x, s16 y, s16 z) {
     f32 posX = x;
     f32 posY = y;
     f32 posZ = z;
-
+	/*
     if (sFixedModeBasePosition[0] != posX || sFixedModeBasePosition[1] != posY
         || sFixedModeBasePosition[2] != posZ) {
         basePosSet = TRUE;
@@ -5529,6 +5532,7 @@ s32 set_camera_mode_fixed(struct Camera *c, s16 x, s16 y, s16 z) {
         vec3f_set(c->pos, sFixedModeBasePosition[0], sMarioCamState->pos[1],
                   sFixedModeBasePosition[2]);
     }
+    */
     return basePosSet;
 }
 
@@ -5598,7 +5602,7 @@ void parallel_tracking_init(struct Camera *c, struct ParallelTrackingPoint *path
         c->pos[1] = (sParTrackPath[0].pos[1] + sParTrackPath[1].pos[1]) / 2;
         c->pos[2] = (sParTrackPath[0].pos[2] + sParTrackPath[1].pos[2]) / 2;
         sStatusFlags &= ~CAM_FLAG_SMOOTH_MOVEMENT;
-        c->mode = CAMERA_MODE_PARALLEL_TRACKING;
+        //c->mode = CAMERA_MODE_PARALLEL_TRACKING;
     }
 }
 
@@ -5677,7 +5681,7 @@ BAD_RETURN(s32) cam_rr_enter_building(struct Camera *c) {
 BAD_RETURN(s32) cam_rr_enter_building_side(struct Camera *c) {
     if (c->mode != CAMERA_MODE_FIXED) {
         sStatusFlags &= ~CAM_FLAG_SMOOTH_MOVEMENT;
-        c->mode = CAMERA_MODE_FIXED;
+        //c->mode = CAMERA_MODE_FIXED;
     }
 }
 
@@ -5871,8 +5875,8 @@ BAD_RETURN(s32) cam_castle_basement_look_downstairs(struct Camera *c) {
 BAD_RETURN(s32) cam_castle_enter_lobby(struct Camera *c) {
     if (c->mode != CAMERA_MODE_FIXED) {
         sStatusFlags &= ~CAM_FLAG_SMOOTH_MOVEMENT;
-        set_fixed_cam_axis_sa_lobby(c->mode);
-        c->mode = CAMERA_MODE_FIXED;
+        //set_fixed_cam_axis_sa_lobby(c->mode);
+        //c->mode = CAMERA_MODE_FIXED;
     }
 }
 
