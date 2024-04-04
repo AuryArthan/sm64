@@ -1616,7 +1616,7 @@ s32 update_boss_fight_camera(struct Camera *c, Vec3f focus, Vec3f pos) {
     if (gCurrLevelNum == LEVEL_BBH) { pos[1] = 2047.f; }
 
     // Rotate from C-Button input
-    if (sCSideButtonYaw < 0) { 
+    if (sCSideButtonYaw < 0) {
         sModeOffsetYaw += 0x200;
         if ((sCSideButtonYaw += 0x100) > 0) {
             sCSideButtonYaw = 0;
@@ -1824,7 +1824,6 @@ s32 update_behind_mario_camera(struct Camera *c, Vec3f focus, Vec3f pos) {
     //! @bug C-Right and C-Up take precedence due to the way input is handled here
 
     // Rotate right
-    maxDist = 80.f;
     if (sCButtonsPressed & L_CBUTTONS) {
         if (gPlayer1Controller->buttonPressed & L_CBUTTONS) {
             play_sound_cbutton_side();
@@ -2100,7 +2099,7 @@ s16 update_default_camera(struct Camera *c) {
     if (gCameraMovementFlags & CAM_MOVE_ZOOMED_OUT) {
         //! In Mario mode, the camera is zoomed out further than in Lakitu mode (1400 vs 1200)
         if (set_cam_angle(0) == CAM_ANGLE_MARIO) {
-            zoomDist = gCameraZoomDist + 300; //1050; // how much to zoom out camera is zoomed out
+            zoomDist = gCameraZoomDist + 1050;
         } else {
             zoomDist = gCameraZoomDist + 400;
         }
@@ -2401,7 +2400,7 @@ void mode_lakitu_camera(struct Camera *c) {
  * When no other mode is active and the current R button mode is Mario
  */
 void mode_mario_camera(struct Camera *c) {
-    gCameraZoomDist = 700.f;//350.f; // how close is the close mario cam
+    gCameraZoomDist = 350.f;
     mode_default_camera(c);
 }
 
@@ -3018,11 +3017,11 @@ void update_camera(struct Camera *c) {
         // Only process R_TRIG if 'fixed' is not selected in the menu
         if (cam_select_alt_mode(0) == CAM_SELECTION_MARIO) {
             if (gPlayer1Controller->buttonPressed & R_TRIG) {
-                //if (set_cam_angle(0) == CAM_ANGLE_LAKITU) {
-                //    set_cam_angle(CAM_ANGLE_MARIO);
-                //} else {
-                //    set_cam_angle(CAM_ANGLE_LAKITU);
-                //}
+                if (set_cam_angle(0) == CAM_ANGLE_LAKITU) {
+                    set_cam_angle(CAM_ANGLE_MARIO);
+                } else {
+                    set_cam_angle(CAM_ANGLE_LAKITU);
+                }
             }
         }
         play_sound_if_cam_switched_to_lakitu_or_mario();
@@ -3211,8 +3210,6 @@ void reset_camera(struct Camera *c) {
     UNUSED struct LinearTransitionPoint *start = &sModeInfo.transitionStart;
     UNUSED struct LinearTransitionPoint *end = &sModeInfo.transitionEnd;
 
-	c->mode = 4; //!
-	// there appears to be more than just mode here, entering BOB still switches to Lakitu cam, that is why I commented out the first 'reset_camera()' call in level_update.c
     gCamera = c;
     gCameraMovementFlags = 0;
     s2ndRotateFlags = 0;
@@ -3285,8 +3282,6 @@ void init_camera(struct Camera *c) {
     Vec3f marioOffset;
     s32 i;
 
-	c->mode = 4; //!
-	c->defMode = 4; //!
     sCreditsPlayer2Pitch = 0;
     sCreditsPlayer2Yaw = 0;
     gPrevLevel = gCurrLevelArea / 16;
@@ -3431,9 +3426,9 @@ void init_camera(struct Camera *c) {
     vec3f_copy(gLakituState.goalFocus, c->focus);
     vec3f_copy(gLakituState.pos, c->pos);
     vec3f_copy(gLakituState.focus, c->focus);
-    //if (c->mode == CAMERA_MODE_FIXED) {
-    //   set_fixed_cam_axis_sa_lobby(c->mode);
-    //}
+    if (c->mode == CAMERA_MODE_FIXED) {
+        set_fixed_cam_axis_sa_lobby(c->mode);
+    }
     store_lakitu_cam_info_for_c_up(c);
     gLakituState.yaw = calculate_yaw(c->focus, c->pos);
     gLakituState.nextYaw = gLakituState.yaw;
@@ -3456,9 +3451,6 @@ void init_camera(struct Camera *c) {
  *      modulo-4's the result, because each 8-bit mask only has 4 area bits for each level
  */
 void zoom_out_if_paused_and_outside(struct GraphNodeCamera *camera) {
-	camera = camera; // just to avoid unused warning
-	return ;
-	/*
     UNUSED u8 filler1[8];
     UNUSED f32 dist;
     UNUSED s16 pitch;
@@ -3489,7 +3481,7 @@ void zoom_out_if_paused_and_outside(struct GraphNodeCamera *camera) {
         }
     } else {
         sFramesPaused = 0;
-    }*/
+    }
 }
 
 void select_mario_cam_mode(void) {
@@ -3700,9 +3692,6 @@ s32 move_point_along_spline(Vec3f p, struct CutsceneSplinePoint spline[], s16 *s
  * @return the current selection
  */
 s32 cam_select_alt_mode(s32 selection) {
-	selection = selection;
-	return CAM_SELECTION_MARIO;
-	/*
     s32 mode = CAM_SELECTION_FIXED;
 
     if (selection == CAM_SELECTION_MARIO) {
@@ -3713,18 +3702,17 @@ s32 cam_select_alt_mode(s32 selection) {
     }
 
     // The alternate mode is up-close, but the player just selected fixed in the pause menu
-    //if (selection == CAM_SELECTION_FIXED && (sSelectionFlags & CAM_MODE_MARIO_SELECTED)) {
+    if (selection == CAM_SELECTION_FIXED && (sSelectionFlags & CAM_MODE_MARIO_SELECTED)) {
         // So change to normal mode in case the user paused in up-close mode
-    //    set_cam_angle(CAM_ANGLE_LAKITU);
-    //    sSelectionFlags &= ~CAM_MODE_MARIO_SELECTED;
-    //    sCameraSoundFlags |= CAM_SOUND_UNUSED_SELECT_FIXED;
-    //}
+        set_cam_angle(CAM_ANGLE_LAKITU);
+        sSelectionFlags &= ~CAM_MODE_MARIO_SELECTED;
+        sCameraSoundFlags |= CAM_SOUND_UNUSED_SELECT_FIXED;
+    }
 
     if (sSelectionFlags & CAM_MODE_MARIO_SELECTED) {
         mode = CAM_SELECTION_MARIO;
     }
     return mode;
-    */
 }
 
 /**
@@ -3735,9 +3723,6 @@ s32 cam_select_alt_mode(s32 selection) {
  * If `mode` is 2, start Lakitu mode
  */
 s32 set_cam_angle(s32 mode) {
-	mode = CAM_ANGLE_MARIO;
-	return mode;
-	/*
     s32 curMode = CAM_ANGLE_LAKITU;
 
     // Switch to Mario mode
@@ -3764,7 +3749,7 @@ s32 set_cam_angle(s32 mode) {
     if (sSelectionFlags & CAM_MODE_MARIO_ACTIVE) {
         curMode = CAM_ANGLE_MARIO;
     }
-    return curMode;*/
+    return curMode;
 }
 
 /**
@@ -3911,16 +3896,15 @@ s32 find_c_buttons_pressed(u16 currentState, u16 buttonsPressed, u16 buttonsDown
  */
 s32 update_camera_hud_status(struct Camera *c) {
     s16 status = CAM_STATUS_NONE;
-	
-	c = c;
-    //if (c->cutscene != 0
-    //    || ((gPlayer1Controller->buttonDown & R_TRIG) && cam_select_alt_mode(0) == CAM_SELECTION_FIXED)) {
-    //    status |= CAM_STATUS_FIXED;
-    //} else if (set_cam_angle(0) == CAM_ANGLE_MARIO) {
+
+    if (c->cutscene != 0
+        || ((gPlayer1Controller->buttonDown & R_TRIG) && cam_select_alt_mode(0) == CAM_SELECTION_FIXED)) {
+        status |= CAM_STATUS_FIXED;
+    } else if (set_cam_angle(0) == CAM_ANGLE_MARIO) {
         status |= CAM_STATUS_MARIO;
-    //} else {
-    //    status |= CAM_STATUS_LAKITU;
-    //}
+    } else {
+        status |= CAM_STATUS_LAKITU;
+    }
     if (gCameraMovementFlags & CAM_MOVE_ZOOMED_OUT) {
         status |= CAM_STATUS_C_DOWN;
     }
@@ -5029,30 +5013,28 @@ void handle_c_button_movement(struct Camera *c) {
         }
 
         // Rotate left or right
-        cSideYaw = 0x0500;//0x1000; //this is how much you rotate the camera by, every time you press a side c button
-        //if (gPlayer1Controller->buttonPressed & R_CBUTTONS) {
-		if (sCButtonsPressed & R_CBUTTONS) {
-            //if (gCameraMovementFlags & CAM_MOVE_ROTATE_LEFT) {
-            //    gCameraMovementFlags &= ~CAM_MOVE_ROTATE_LEFT;
-            //} else {
-                //gCameraMovementFlags |= CAM_MOVE_ROTATE_RIGHT;
-                //if (sCSideButtonYaw == 0) {
-                //    play_sound_cbutton_side();
-                //}
+        cSideYaw = 0x1000;
+        if (gPlayer1Controller->buttonPressed & R_CBUTTONS) {
+            if (gCameraMovementFlags & CAM_MOVE_ROTATE_LEFT) {
+                gCameraMovementFlags &= ~CAM_MOVE_ROTATE_LEFT;
+            } else {
+                gCameraMovementFlags |= CAM_MOVE_ROTATE_RIGHT;
+                if (sCSideButtonYaw == 0) {
+                    play_sound_cbutton_side();
+                }
                 sCSideButtonYaw = -cSideYaw;
-            //}
+            }
         }
-        //if (gPlayer1Controller->buttonPressed & L_CBUTTONS) {
-		if (sCButtonsPressed & L_CBUTTONS) {
-            //if (gCameraMovementFlags & CAM_MOVE_ROTATE_RIGHT) {
-            //    gCameraMovementFlags &= ~CAM_MOVE_ROTATE_RIGHT;
-            //} else {
-                //gCameraMovementFlags |= CAM_MOVE_ROTATE_LEFT;
-                //if (sCSideButtonYaw == 0) {
-                //    play_sound_cbutton_side();
-                //}
+        if (gPlayer1Controller->buttonPressed & L_CBUTTONS) {
+            if (gCameraMovementFlags & CAM_MOVE_ROTATE_RIGHT) {
+                gCameraMovementFlags &= ~CAM_MOVE_ROTATE_RIGHT;
+            } else {
+                gCameraMovementFlags |= CAM_MOVE_ROTATE_LEFT;
+                if (sCSideButtonYaw == 0) {
+                    play_sound_cbutton_side();
+                }
                 sCSideButtonYaw = cSideYaw;
-            //}
+            }
         }
     }
 }
@@ -5519,7 +5501,7 @@ s32 set_camera_mode_fixed(struct Camera *c, s16 x, s16 y, s16 z) {
     f32 posX = x;
     f32 posY = y;
     f32 posZ = z;
-	/*
+
     if (sFixedModeBasePosition[0] != posX || sFixedModeBasePosition[1] != posY
         || sFixedModeBasePosition[2] != posZ) {
         basePosSet = TRUE;
@@ -5532,7 +5514,6 @@ s32 set_camera_mode_fixed(struct Camera *c, s16 x, s16 y, s16 z) {
         vec3f_set(c->pos, sFixedModeBasePosition[0], sMarioCamState->pos[1],
                   sFixedModeBasePosition[2]);
     }
-    */
     return basePosSet;
 }
 
@@ -5602,7 +5583,7 @@ void parallel_tracking_init(struct Camera *c, struct ParallelTrackingPoint *path
         c->pos[1] = (sParTrackPath[0].pos[1] + sParTrackPath[1].pos[1]) / 2;
         c->pos[2] = (sParTrackPath[0].pos[2] + sParTrackPath[1].pos[2]) / 2;
         sStatusFlags &= ~CAM_FLAG_SMOOTH_MOVEMENT;
-        //c->mode = CAMERA_MODE_PARALLEL_TRACKING;
+        c->mode = CAMERA_MODE_PARALLEL_TRACKING;
     }
 }
 
@@ -5681,7 +5662,7 @@ BAD_RETURN(s32) cam_rr_enter_building(struct Camera *c) {
 BAD_RETURN(s32) cam_rr_enter_building_side(struct Camera *c) {
     if (c->mode != CAMERA_MODE_FIXED) {
         sStatusFlags &= ~CAM_FLAG_SMOOTH_MOVEMENT;
-        //c->mode = CAMERA_MODE_FIXED;
+        c->mode = CAMERA_MODE_FIXED;
     }
 }
 
@@ -5875,8 +5856,8 @@ BAD_RETURN(s32) cam_castle_basement_look_downstairs(struct Camera *c) {
 BAD_RETURN(s32) cam_castle_enter_lobby(struct Camera *c) {
     if (c->mode != CAMERA_MODE_FIXED) {
         sStatusFlags &= ~CAM_FLAG_SMOOTH_MOVEMENT;
-        //set_fixed_cam_axis_sa_lobby(c->mode);
-        //c->mode = CAMERA_MODE_FIXED;
+        set_fixed_cam_axis_sa_lobby(c->mode);
+        c->mode = CAMERA_MODE_FIXED;
     }
 }
 
