@@ -2400,7 +2400,7 @@ void mode_lakitu_camera(struct Camera *c) {
  * When no other mode is active and the current R button mode is Mario
  */
 void mode_mario_camera(struct Camera *c) {
-    gCameraZoomDist = 350.f;
+    gCameraZoomDist = 700.f;//350.f; // how close is the close mario cam
     mode_default_camera(c);
 }
 
@@ -5019,9 +5019,11 @@ void handle_c_button_movement(struct Camera *c) {
         }
 
         // Rotate left or right
-        cSideYaw = 0x1000;
-        if (gPlayer1Controller->buttonPressed & R_CBUTTONS) {
-            if (gCameraMovementFlags & CAM_MOVE_ROTATE_LEFT) {
+        cSideYaw = 0x0500;//0x1000; //this is how much you rotate the camera by, every time you press a side c button
+        //if (gPlayer1Controller->buttonPressed & R_CBUTTONS) {
+		if (sCButtonsPressed & R_CBUTTONS) {
+			sCSideButtonYaw = -cSideYaw;
+            /*if (gCameraMovementFlags & CAM_MOVE_ROTATE_LEFT) {
                 gCameraMovementFlags &= ~CAM_MOVE_ROTATE_LEFT;
             } else {
                 gCameraMovementFlags |= CAM_MOVE_ROTATE_RIGHT;
@@ -5029,10 +5031,12 @@ void handle_c_button_movement(struct Camera *c) {
                     play_sound_cbutton_side();
                 }
                 sCSideButtonYaw = -cSideYaw;
-            }
+            }*/
         }
-        if (gPlayer1Controller->buttonPressed & L_CBUTTONS) {
-            if (gCameraMovementFlags & CAM_MOVE_ROTATE_RIGHT) {
+        //if (gPlayer1Controller->buttonPressed & L_CBUTTONS) {
+        if (sCButtonsPressed & L_CBUTTONS) {
+			sCSideButtonYaw = cSideYaw;
+            /*if (gCameraMovementFlags & CAM_MOVE_ROTATE_RIGHT) {
                 gCameraMovementFlags &= ~CAM_MOVE_ROTATE_RIGHT;
             } else {
                 gCameraMovementFlags |= CAM_MOVE_ROTATE_LEFT;
@@ -5040,7 +5044,7 @@ void handle_c_button_movement(struct Camera *c) {
                     play_sound_cbutton_side();
                 }
                 sCSideButtonYaw = cSideYaw;
-            }
+            }*/
         }
     }
 }
