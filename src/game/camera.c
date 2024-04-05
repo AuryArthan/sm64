@@ -3723,6 +3723,8 @@ s32 cam_select_alt_mode(s32 selection) {
  * If `mode` is 2, start Lakitu mode
  */
 s32 set_cam_angle(s32 mode) {
+	return CAM_ANGLE_MARIO;
+	/*
     s32 curMode = CAM_ANGLE_LAKITU;
 
     // Switch to Mario mode
@@ -3750,6 +3752,7 @@ s32 set_cam_angle(s32 mode) {
         curMode = CAM_ANGLE_MARIO;
     }
     return curMode;
+    */
 }
 
 /**
