@@ -3451,6 +3451,8 @@ void init_camera(struct Camera *c) {
  *      modulo-4's the result, because each 8-bit mask only has 4 area bits for each level
  */
 void zoom_out_if_paused_and_outside(struct GraphNodeCamera *camera) {
+	return ;
+	/*
     UNUSED u8 filler1[8];
     UNUSED f32 dist;
     UNUSED s16 pitch;
@@ -3482,6 +3484,7 @@ void zoom_out_if_paused_and_outside(struct GraphNodeCamera *camera) {
     } else {
         sFramesPaused = 0;
     }
+    */
 }
 
 void select_mario_cam_mode(void) {
