@@ -2852,6 +2852,8 @@ void transition_to_camera_mode(struct Camera *c, s16 newMode, s16 numFrames) {
  * @param frames number of frames the transition should last, only used when entering C_UP
  */
 void set_camera_mode(struct Camera *c, s16 mode, s16 frames) {
+	return ;
+	/*
     struct LinearTransitionPoint *start = &sModeInfo.transitionStart;
     struct LinearTransitionPoint *end = &sModeInfo.transitionEnd;
 
@@ -2898,6 +2900,7 @@ void set_camera_mode(struct Camera *c, s16 mode, s16 frames) {
         vec3f_get_dist_and_angle(start->focus, start->pos, &start->dist, &start->pitch, &start->yaw);
         vec3f_get_dist_and_angle(end->focus, end->pos, &end->dist, &end->pitch, &end->yaw);
     }
+    */
 }
 
 /**
