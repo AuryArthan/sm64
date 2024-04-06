@@ -3050,7 +3050,7 @@ void update_camera(struct Camera *c) {
 
     c->yaw = gLakituState.yaw;
     c->nextYaw = gLakituState.nextYaw;
-    c->mode = gLakituState.mode;
+    c->mode = 4; //gLakituState.mode;
     c->defMode = gLakituState.defMode;
 
     camera_course_processing(c);
@@ -3093,7 +3093,7 @@ void update_camera(struct Camera *c) {
                 case CAMERA_MODE_INSIDE_CANNON:
                     mode_cannon_camera(c);
                     break;
-
+                
                 default:
                     mode_mario_camera(c);
             }
