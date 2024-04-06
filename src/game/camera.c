@@ -3076,7 +3076,7 @@ void update_camera(struct Camera *c) {
     // If not in a cutscene, do mode processing
     if (c->cutscene == 0) {
         sYawSpeed = 0x400;
-
+		
         if (sSelectionFlags & CAM_MODE_MARIO_ACTIVE) {
             switch (c->mode) {
                 case CAMERA_MODE_BEHIND_MARIO:
@@ -3229,7 +3229,7 @@ void reset_camera(struct Camera *c) {
     unused8032CFCC = -1;
     unused8032CFC8 = -1;
     gCameraMovementFlags = 0;
-    gCameraMovementFlags |= CAM_MOVE_INIT_CAMERA;
+    //gCameraMovementFlags |= CAM_MOVE_INIT_CAMERA; // if you comment this out then the camera stays continuous, but there is an undesired sideffect of the camera starting in weird positions
     unused8033B316 = 0;
     sStatusFlags = 0;
     unused8033B31A = 0;
