@@ -3050,7 +3050,7 @@ void update_camera(struct Camera *c) {
 
     c->yaw = gLakituState.yaw;
     c->nextYaw = gLakituState.nextYaw;
-    c->mode = 4; //gLakituState.mode;
+    c->mode = gLakituState.mode;
     c->defMode = gLakituState.defMode;
 
     camera_course_processing(c);
