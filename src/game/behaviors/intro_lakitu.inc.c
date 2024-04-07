@@ -10,7 +10,8 @@
  * set lakitu's location.
  */
 void intro_lakitu_set_offset_from_camera(struct Object *obj, Vec3f offset) {
-    f32 dist;
+	return ;
+    /*f32 dist;
     Vec3s focusAngles;
     s16 offsetPitch, offsetYaw;
 
@@ -20,11 +21,12 @@ void intro_lakitu_set_offset_from_camera(struct Object *obj, Vec3f offset) {
     vec3f_get_dist_and_angle(gCamera->pos, offset, &dist, &offsetPitch, &offsetYaw);
     vec3f_set_dist_and_angle(gCamera->pos, offset, dist,
                              focusAngles[0] + offsetPitch, focusAngles[1] + offsetYaw);
-    vec3f_to_object_pos(obj, offset);
+    vec3f_to_object_pos(obj, offset);*/
 }
 
 void intro_lakitu_set_focus(struct Object *obj, Vec3f newFocus) {
-    UNUSED u8 filler1[12];
+	return ;
+    /*UNUSED u8 filler1[12];
     Vec3f origin;
     f32 dist;
     s16 pitch, yaw;
@@ -35,7 +37,7 @@ void intro_lakitu_set_focus(struct Object *obj, Vec3f newFocus) {
     vec3f_get_dist_and_angle(origin, newFocus, &dist, &pitch, &yaw);
 
     obj->oFaceAnglePitch = pitch;
-    obj->oFaceAngleYaw = yaw;
+    obj->oFaceAngleYaw = yaw;*/
 }
 
 /**
@@ -72,7 +74,8 @@ s32 intro_lakitu_set_pos_and_focus(struct Object *obj, struct CutsceneSplinePoin
 #endif
 
 void bhv_intro_lakitu_loop(void) {
-    Vec3f sp64, sp58, sp4C;
+	return ;
+    /*Vec3f sp64, sp58, sp4C;
     UNUSED u8 filler[16];
 
     switch (o->oAction) {
@@ -245,7 +248,7 @@ void bhv_intro_lakitu_loop(void) {
 
             cur_obj_set_pos_via_transform();
             break;
-    }
+    }*/
 }
 
 #undef TIMER1
