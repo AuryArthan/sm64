@@ -3229,7 +3229,7 @@ void reset_camera(struct Camera *c) {
     unused8032CFCC = -1;
     unused8032CFC8 = -1;
     gCameraMovementFlags = 0;
-    //gCameraMovementFlags |= CAM_MOVE_INIT_CAMERA; // if you comment this out then the camera stays continuous, but there is an undesired sideffect of the camera starting in weird positions
+    gCameraMovementFlags |= CAM_MOVE_INIT_CAMERA; // if you comment this out then the camera stays continuous, but there is an undesired sideffect of the camera starting in weird positions
     unused8033B316 = 0;
     sStatusFlags = 0;
     unused8033B31A = 0;
@@ -3286,10 +3286,11 @@ void init_camera(struct Camera *c) {
     sCreditsPlayer2Pitch = 0;
     sCreditsPlayer2Yaw = 0;
     gPrevLevel = gCurrLevelArea / 16;
-    gCurrLevelArea = gCurrLevelNum * 16 + gCurrentArea->index;
+    //gCurrLevelArea = gCurrLevelNum * 16 + gCurrentArea->index;
     sSelectionFlags &= CAM_MODE_MARIO_SELECTED;
-    sFramesPaused = 0;
+    sFramesPaused = 0; 
     gLakituState.mode = c->mode;
+    gLakituState.defMode = 4;
     gLakituState.defMode = c->defMode;
     gLakituState.posHSpeed = 0.3f;
     gLakituState.posVSpeed = 0.3f;
@@ -3328,7 +3329,7 @@ void init_camera(struct Camera *c) {
     marioOffset[0] = 0.f;
     marioOffset[1] = 125.f;
     marioOffset[2] = 400.f;
-
+    
     // Set the camera's starting position or start a cutscene for certain levels
     switch (gCurrLevelNum) {
         // Calls the initial cutscene when you enter Bowser battle levels
