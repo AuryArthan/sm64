@@ -2099,7 +2099,7 @@ s16 update_default_camera(struct Camera *c) {
     if (gCameraMovementFlags & CAM_MOVE_ZOOMED_OUT) {
         //! In Mario mode, the camera is zoomed out further than in Lakitu mode (1400 vs 1200)
         if (set_cam_angle(0) == CAM_ANGLE_MARIO) {
-            zoomDist = gCameraZoomDist + 1050;
+            zoomDist = gCameraZoomDist + 300; //1050; // how much to zoom out camera is zoomed out
         } else {
             zoomDist = gCameraZoomDist + 400;
         }
