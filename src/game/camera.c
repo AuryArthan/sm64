@@ -5866,11 +5866,12 @@ BAD_RETURN(s32) cam_castle_basement_look_downstairs(struct Camera *c) {
  * changes to fixed mode.
  */
 BAD_RETURN(s32) cam_castle_enter_lobby(struct Camera *c) {
+	return;/*
     if (c->mode != CAMERA_MODE_FIXED) {
         sStatusFlags &= ~CAM_FLAG_SMOOTH_MOVEMENT;
         set_fixed_cam_axis_sa_lobby(c->mode);
         c->mode = CAMERA_MODE_FIXED;
-    }
+    }*/
 }
 
 /**
