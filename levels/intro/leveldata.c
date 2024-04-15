@@ -8721,9 +8721,9 @@ const Gfx intro_seg7_dl_copyright[] = {
     gsSPVertex(intro_seg7_vertex_copyright, 4, 0),
     gsSP2Triangles( 0,  1,  2, 0x0,  0,  2,  3, 0x0),
 
-    gsDPLoadTextureBlock(intro_seg7_texture_tm, G_IM_FMT_RGBA, G_IM_SIZ_16b, 16, 16, 0, G_TX_CLAMP, G_TX_CLAMP, 4, 4, G_TX_NOLOD, G_TX_NOLOD),
-    gsSPVertex(intro_seg7_vertex_tm, 4, 0),
-    gsSP2Triangles( 0,  1,  2, 0x0,  0,  2,  3, 0x0),
+    //gsDPLoadTextureBlock(intro_seg7_texture_tm, G_IM_FMT_RGBA, G_IM_SIZ_16b, 16, 16, 0, G_TX_CLAMP, G_TX_CLAMP, 4, 4, G_TX_NOLOD, G_TX_NOLOD),
+    //gsSPVertex(intro_seg7_vertex_tm, 4, 0),
+    //gsSP2Triangles( 0,  1,  2, 0x0,  0,  2,  3, 0x0),
 
     gsSPTexture(0xFFFF, 0xFFFF, 0, G_TX_RENDERTILE, G_OFF),
     gsDPPipeSync(),
