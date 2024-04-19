@@ -2101,7 +2101,7 @@ s16 update_default_camera(struct Camera *c) {
         if (set_cam_angle(0) == CAM_ANGLE_MARIO) {
             zoomDist = gCameraZoomDist + 400; //1050; // how much the zoom out camera is zoomed out
             c->pos[1] = 4500; // camera height for zoomed out camera (this is now ignored as it is)
-            pitch = -2000; // camera picth for zoomed out camera (this works, but the height is not affected by c->pos[1] for some reason)
+            pitch = -1000; // camera picth for zoomed out camera (this works, but the height is not affected by c->pos[1] for some reason)
             vec3f_set_dist_and_angle(sMarioCamState->pos, c->pos, dist, pitch, yaw);
         } else {
             zoomDist = gCameraZoomDist + 400;
