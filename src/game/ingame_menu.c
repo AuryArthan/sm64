@@ -2490,18 +2490,18 @@ void render_cam_and_aspect_setting(void) {
     gDPSetEnvColor(gDisplayListHead++, 255, 255, 255, 255); //gDialogTextAlpha);
     // camera
     if (camera_invert) { 
-		print_generic_string(2, 8, textCurrCamInv);
+		print_generic_string(6, 10, textCurrCamInv);
 	} else {
-		print_generic_string(2, 8, textCurrCamReg);
+		print_generic_string(6, 10, textCurrCamReg);
 	}
 	if (gPlayer1Controller->buttonPressed & R_TRIG){
         camera_invert ^= 1; 
     }
 	// aspect
     if (widescreen_flag) {
-        print_generic_string(2, 21, textCurrRatio169);
+        print_generic_string(6, 24, textCurrRatio169);
     } else {
-		print_generic_string(2, 21, textCurrRatio43);
+		print_generic_string(6, 24, textCurrRatio43);
     }
     if (gPlayer1Controller->buttonPressed & L_TRIG){
         widescreen_flag ^= 1;
@@ -2825,12 +2825,13 @@ void print_hud_pause_colorful_str(void) {
     gSPDisplayList(gDisplayListHead++, dl_rgba16_text_begin);
     gDPSetEnvColor(gDisplayListHead++, 255, 255, 255, gMenuTextAlpha);
 
-    print_hud_lut_string(HUD_LUT_GLOBAL, PAUSE_X, 81, textPause);
+    print_hud_lut_string(HUD_LUT_GLOBAL, PAUSE_X, 81-18, textPause);
 
     gSPDisplayList(gDisplayListHead++, dl_rgba16_text_end);
 }
 
 void render_pause_castle_course_stars(s16 x, s16 y, s16 fileIndex, s16 courseIndex) {
+	
     s16 hasStar = 0;
 	
 #ifdef VERSION_CN
@@ -2845,7 +2846,7 @@ void render_pause_castle_course_stars(s16 x, s16 y, s16 fileIndex, s16 courseInd
     u16 starCount = save_file_get_course_star_count(fileIndex, courseIndex);
 
     u16 nextStar = 0;
-
+	
     if (starFlags & (1 << 6)) {
         starCount--;
         print_generic_string(x + 89, y - 5, textStar);
@@ -2919,7 +2920,7 @@ void render_pause_castle_main_strings(s16 x, s16 y) {
 
     u8 strVal[8];
     s16 prevCourseIndex = gMenuLineNum;
-
+		
 #ifdef VERSION_EU
     switch (gInGameLanguage) {
         case LANGUAGE_ENGLISH:
@@ -3060,8 +3061,8 @@ s16 render_pause_screen(void) {
         case MENU_STATE_PAUSE_SCREEN_CASTLE:
             shade_screen();
             print_hud_pause_colorful_str();
-            render_pause_castle_menu_box(160, 143);
-            render_pause_castle_main_strings(104, 60);
+            render_pause_castle_menu_box(160, 143+25);
+            render_pause_castle_main_strings(104, 60+25);
 
 #ifdef VERSION_EU
             if (gPlayer3Controller->buttonPressed & (A_BUTTON | START_BUTTON | Z_TRIG))
