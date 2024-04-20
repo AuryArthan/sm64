@@ -40,10 +40,28 @@ s16 gDialogY;
 FORCE_BSS s16 gCutsceneMsgXOffset;
 FORCE_BSS s16 gCutsceneMsgYOffset;
 s8 gRedCoinsCollected;
+// pause menu toggle
 u8 textCurrRatio43[] = { TEXT_HUD_CURRENT_RATIO_43 };
 u8 textCurrRatio169[] = { TEXT_HUD_CURRENT_RATIO_169 };
 u8 textCurrCamReg[] = { TEXT_HUD_CURRENT_CAMERA_REG };
 u8 textCurrCamInv[] = { TEXT_HUD_CURRENT_CAMERA_INV };
+// mario pic in pause menu (cant print that many dots, there is a limit to characters on the screen)
+u8 textDot[] = { DOT };
+u8 line1[14] = {0,0,0,0,1,1,1,1,1,0,0,0,0,0};
+u8 line2[14] = {0,0,0,2,2,2,2,2,2,1,0,0,0,0};
+u8 line3[14] = {0,0,2,2,0,0,2,2,2,2,1,0,0,0};
+u8 line4[14] = {0,0,2,2,2,2,2,2,2,2,2,1,0,0};
+u8 line5[14] = {0,1,1,1,1,1,2,2,2,2,2,2,1,0};
+u8 line6[14] = {1,1,1,1,1,1,1,1,1,2,2,2,2,1};
+u8 line7[14] = {0,1,1,0,2,0,0,2,1,1,2,2,2,1};
+u8 line8[14] = {0,0,0,1,2,1,0,2,2,1,1,1,2,1};
+u8 line9[14] = {0,0,0,1,2,1,0,2,2,1,1,2,2,1};
+u8 line10[14] = {0,2,2,2,2,2,2,2,1,1,1,2,2,1};
+u8 line11[14] = {1,2,2,2,1,2,1,2,2,1,2,2,2,1};
+u8 line12[14] = {1,1,1,1,1,1,1,1,2,2,2,1,1,0};
+u8 line13[14] = {0,1,1,1,1,1,2,2,2,2,1,1,1,1};
+u8 line14[14] = {0,0,0,1,1,2,2,2,2,1,1,1,1,0};
+u8 line15[14] = {0,0,0,0,1,1,1,1,1,0,0,0,0,0};
 
 extern u8 gLastCompletedCourseNum;
 extern u8 gLastCompletedStarNum;
@@ -2485,9 +2503,47 @@ void render_pause_red_coins(void) {
     }
 }
 
+/*void render_mario_pic_pixel(int x, int y, int strength) {
+	print_generic_string(x, y, textDot);
+	//int i,j;
+	//for(i = 0; i < size; ++i){
+	//	for(j = 0; j < size; ++j){
+	//		if((i+j)%strength == 0) print_generic_string(x+2*i, y+2*j, textDot);
+	//	}
+	//}
+}
+void render_mario_pic_line(int x, int y, int length, u8 *arr) {
+	int l;
+	for(l = 0; l < length; ++l){
+		if(arr[l] == 0) continue;
+		else if(arr[l] == 1) render_mario_pic_pixel(x+l*2, y, 1);
+		else if(arr[l] == 2) render_mario_pic_pixel(x+l*2, y, 2);
+	}
+}
+void render_mario_pic_in_pause_menu(int x, int y) {
+	gSPDisplayList(gDisplayListHead++, dl_ia_text_begin);
+    gDPSetEnvColor(gDisplayListHead++, 255, 255, 255, 255);
+    render_mario_pic_line(x, y,          14, &line1);
+    render_mario_pic_line(x, y-1*2, 14, &line2);
+    render_mario_pic_line(x, y-2*2, 14, &line3);
+    render_mario_pic_line(x, y-3*2, 14, &line4);
+    render_mario_pic_line(x, y-4*2, 14, &line5);
+    render_mario_pic_line(x, y-5*2, 14, &line6);
+    render_mario_pic_line(x, y-6*2, 14, &line7);
+    render_mario_pic_line(x, y-7*2, 14, &line8);
+    render_mario_pic_line(x, y-8*2, 14, &line9);
+    render_mario_pic_line(x, y-9*2, 14, &line10);
+    render_mario_pic_line(x, y-10*2, 14, &line11);
+    render_mario_pic_line(x, y-11*2, 14, &line12);
+    render_mario_pic_line(x, y-12*2, 14, &line13);
+    render_mario_pic_line(x, y-13*2, 14, &line14);
+    render_mario_pic_line(x, y-14*2, 14, &line15);
+    gSPDisplayList(gDisplayListHead++, dl_ia_text_end);
+}*/
+
 void render_cam_and_aspect_setting(void) {
     gSPDisplayList(gDisplayListHead++, dl_ia_text_begin);
-    gDPSetEnvColor(gDisplayListHead++, 255, 255, 255, 255); //gDialogTextAlpha);
+    gDPSetEnvColor(gDisplayListHead++, 255, 255, 255, 255);
     // camera
     if (camera_invert) { 
 		print_generic_string(6, 10, textCurrCamInv);
@@ -2495,7 +2551,8 @@ void render_cam_and_aspect_setting(void) {
 		print_generic_string(6, 10, textCurrCamReg);
 	}
 	if (gPlayer1Controller->buttonPressed & R_TRIG){
-        camera_invert ^= 1; 
+        camera_invert ^= 1;
+        play_sound_rbutton_changed();
     }
 	// aspect
     if (widescreen_flag) {
@@ -2505,6 +2562,7 @@ void render_cam_and_aspect_setting(void) {
     }
     if (gPlayer1Controller->buttonPressed & L_TRIG){
         widescreen_flag ^= 1;
+        play_sound_rbutton_changed();
     }
     gSPDisplayList(gDisplayListHead++, dl_ia_text_end);
 }
@@ -2748,8 +2806,6 @@ void render_pause_course_options(s16 x, s16 y, s8 *index, s16 yIndex) {
 #endif
 
     handle_menu_scrolling(MENU_SCROLL_VERTICAL, index, 1, 2); //3);
-
-	render_cam_and_aspect_setting(); // added this to render cam and aspect in pause menu in levels
 	
     gSPDisplayList(gDisplayListHead++, dl_ia_text_begin);
     gDPSetEnvColor(gDisplayListHead++, 255, 255, 255, gMenuTextAlpha);
@@ -2776,6 +2832,7 @@ void render_pause_course_options(s16 x, s16 y, s8 *index, s16 yIndex) {
 void render_pause_castle_menu_box(s16 x, s16 y) {
 	
 	render_cam_and_aspect_setting(); // added this to render cam and aspect in pause menu outside levels
+	//render_mario_pic_in_pause_menu(142, 216); // didnt work out to print with text, because the characters are limited
 	
     create_dl_translation_matrix(MENU_MTX_PUSH, x - 78, y - 32, 0);
     create_dl_scale_matrix(MENU_MTX_NOPUSH, 1.2f, 0.8f, 1.0f);
@@ -3005,8 +3062,6 @@ s8 gHudFlash = 0;
 s16 render_pause_screen(void) {
     s16 index;
 	
-	//render_cam_and_aspect_setting(); // here I first added the cam and aspect pause menu in levels, but the other menu made it more dim, so I moved this
-		
 #ifdef VERSION_EU
     gInGameLanguage = eu_get_language();
 #endif
@@ -3029,6 +3084,7 @@ s16 render_pause_screen(void) {
 
         case MENU_STATE_PAUSE_SCREEN_COURSE:
             shade_screen();
+            render_cam_and_aspect_setting(); // added this to render cam and aspect in pause menu within levels
             render_pause_my_score_coins();
             render_pause_red_coins();
 
@@ -3084,7 +3140,7 @@ s16 render_pause_screen(void) {
     if (gMenuTextAlpha < 250) {
         gMenuTextAlpha += 25;
     }
-
+	
     return MENU_OPT_NONE;
 }
 
