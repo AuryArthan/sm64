@@ -39,6 +39,12 @@ s16 gDialogY;
 FORCE_BSS s16 gCutsceneMsgXOffset;
 FORCE_BSS s16 gCutsceneMsgYOffset;
 s8 gRedCoinsCollected;
+u8 textCurrRatio43[] = { TEXT_HUD_CURRENT_RATIO_43 };
+u8 textCurrRatio169[] = { TEXT_HUD_CURRENT_RATIO_169 };
+u8 textCurrCamReg[] = { TEXT_HUD_CURRENT_CAMERA_REG };
+u8 textCurrCamInv[] = { TEXT_HUD_CURRENT_CAMERA_INV };
+u8 textPressL[] = { TEXT_HUD_PRESS_L };
+u8 textPressR[] = { TEXT_HUD_PRESS_R };
 
 extern u8 gLastCompletedCourseNum;
 extern u8 gLastCompletedStarNum;
@@ -2480,6 +2486,35 @@ void render_pause_red_coins(void) {
     }
 }
 
+void render_cam_and_aspect_setting(void) {
+    //gSPDisplayList(gDisplayListHead++, dl_ia_text_begin);
+    //gDPSetEnvColor(gDisplayListHead++, 255, 255, 255, gDialogTextAlpha);
+    // camera
+    //if (gConfig.widescreen) { //if (gConfig.caminvert) {
+		print_generic_string(10, 20, textCurrCamInv);
+		print_generic_string(10,  7, textPressR);
+	//} else {
+	//	print_generic_string(10, 20, textCurrCamReg);
+    //    print_generic_string(10,  7, textPressL);
+	//}
+	//if (gPlayer1Controller->buttonPressed & R_TRIG){
+    //    gConfig.widescreen ^= 1; //gConfig.caminvert ^= 1;
+    //}
+	// aspect
+    /*if (gConfig.widescreen) {
+        print_generic_string(10, 20, textCurrRatio169);
+        print_generic_string(10,  7, textPressL);
+    } else {
+		print_generic_string(10, 20, textCurrRatio43);
+        print_generic_string(10,  7, textPressL);
+    }
+    if (gPlayer1Controller->buttonPressed & L_TRIG){
+        gConfig.widescreen ^= 1;
+        save_file_set_widescreen_mode(gConfig.widescreen);
+    }*/
+    //gSPDisplayList(gDisplayListHead++, dl_ia_text_end);
+}
+
 #ifdef VERSION_EU
 u8 gTextCourse[][7] = {
     { TEXT_COURSE },
@@ -2743,6 +2778,9 @@ void render_pause_course_options(s16 x, s16 y, s8 *index, s16 yIndex) {
 }
 
 void render_pause_castle_menu_box(s16 x, s16 y) {
+	
+	render_cam_and_aspect_setting();
+	
     create_dl_translation_matrix(MENU_MTX_PUSH, x - 78, y - 32, 0);
     create_dl_scale_matrix(MENU_MTX_NOPUSH, 1.2f, 0.8f, 1.0f);
     gDPSetEnvColor(gDisplayListHead++, 0, 0, 0, 105);
@@ -2798,7 +2836,7 @@ void print_hud_pause_colorful_str(void) {
 
 void render_pause_castle_course_stars(s16 x, s16 y, s16 fileIndex, s16 courseIndex) {
     s16 hasStar = 0;
-
+	
 #ifdef VERSION_CN
     u8 str[60];
 #else
@@ -2873,7 +2911,7 @@ void render_pause_castle_main_strings(s16 x, s16 y) {
 #else
     void **courseNameTbl = segmented_to_virtual(seg2_course_name_table);
 #endif
-
+	
 #ifdef VERSION_EU
     u8 textCoin[] = { TEXT_COIN };
     u8 textX[] = { TEXT_VARIABLE_X };
@@ -2969,7 +3007,9 @@ s8 gHudFlash = 0;
 
 s16 render_pause_screen(void) {
     s16 index;
-
+	
+	render_cam_and_aspect_setting();
+		
 #ifdef VERSION_EU
     gInGameLanguage = eu_get_language();
 #endif
