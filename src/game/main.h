@@ -3,7 +3,8 @@
 
 #include "config.h"
 
-extern struct Config gConfig;
+extern int widescreen_flag;
+extern int camera_invert;
 
 extern OSThread D_80339210;
 extern OSThread gIdleThread;

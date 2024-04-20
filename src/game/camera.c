@@ -28,6 +28,7 @@
 #include "paintings.h"
 #include "engine/graph_node.h"
 #include "level_table.h"
+#include "main.h"
 
 #define CBUTTON_MASK (U_CBUTTONS | D_CBUTTONS | L_CBUTTONS | R_CBUTTONS)
 
@@ -5023,7 +5024,7 @@ void handle_c_button_movement(struct Camera *c) {
         cSideYaw = 0x0100;//0x1000; //this is how much you rotate the camera by, every time you press a side c button (should be small in continuous camera, otherwise it overshoots)
         //if (gPlayer1Controller->buttonPressed & R_CBUTTONS) {
 		if (sCButtonsPressed & R_CBUTTONS) {
-			sCSideButtonYaw = cSideYaw;
+			sCSideButtonYaw = (1-2*camera_invert)*cSideYaw;
             /*if (gCameraMovementFlags & CAM_MOVE_ROTATE_LEFT) {
                 gCameraMovementFlags &= ~CAM_MOVE_ROTATE_LEFT;
             } else {
@@ -5036,7 +5037,7 @@ void handle_c_button_movement(struct Camera *c) {
         }
         //if (gPlayer1Controller->buttonPressed & L_CBUTTONS) {
         if (sCButtonsPressed & L_CBUTTONS) {
-			sCSideButtonYaw = -cSideYaw;
+			sCSideButtonYaw = -(1-2*camera_invert)*cSideYaw;
             /*if (gCameraMovementFlags & CAM_MOVE_ROTATE_RIGHT) {
                 gCameraMovementFlags &= ~CAM_MOVE_ROTATE_RIGHT;
             } else {

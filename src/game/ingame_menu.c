@@ -22,6 +22,7 @@
 #include "sm64.h"
 #include "text_strings.h"
 #include "types.h"
+#include "main.h"
 
 #ifdef VERSION_EU
 #undef LANGUAGE_FUNCTION
@@ -43,8 +44,6 @@ u8 textCurrRatio43[] = { TEXT_HUD_CURRENT_RATIO_43 };
 u8 textCurrRatio169[] = { TEXT_HUD_CURRENT_RATIO_169 };
 u8 textCurrCamReg[] = { TEXT_HUD_CURRENT_CAMERA_REG };
 u8 textCurrCamInv[] = { TEXT_HUD_CURRENT_CAMERA_INV };
-u8 textPressL[] = { TEXT_HUD_PRESS_L };
-u8 textPressR[] = { TEXT_HUD_PRESS_R };
 
 extern u8 gLastCompletedCourseNum;
 extern u8 gLastCompletedStarNum;
@@ -2490,28 +2489,23 @@ void render_cam_and_aspect_setting(void) {
     gSPDisplayList(gDisplayListHead++, dl_ia_text_begin);
     gDPSetEnvColor(gDisplayListHead++, 255, 255, 255, 255); //gDialogTextAlpha);
     // camera
-    //if (gConfig.widescreen) { //if (gConfig.caminvert) {
-	//	print_generic_string(10, 20, textCurrCamInv);
-	//	print_generic_string(10,  7, textPressR);
-	//} else {
-	//	print_generic_string(10, 20, textCurrCamReg);
-    //    print_generic_string(10,  7, textPressL);
-	//}
-	//if (gPlayer1Controller->buttonPressed & R_TRIG){
-    //    gConfig.widescreen ^= 1; //gConfig.caminvert ^= 1;
-    //}
+    if (camera_invert) { 
+		print_generic_string(2, 8, textCurrCamInv);
+	} else {
+		print_generic_string(2, 8, textCurrCamReg);
+	}
+	if (gPlayer1Controller->buttonPressed & R_TRIG){
+        camera_invert ^= 1; 
+    }
 	// aspect
-    //if (gConfig.widescreen) {
-        print_generic_string(10, 20, textCurrRatio169);
-        print_generic_string(10,  7, textPressL);
-    //} else {
-	//	print_generic_string(10, 20, textCurrRatio43);
-    //    print_generic_string(10,  7, textPressL);
-    //}
-    //if (gPlayer1Controller->buttonPressed & L_TRIG){
-    //    gConfig.widescreen ^= 1;
-    //    save_file_set_widescreen_mode(gConfig.widescreen);
-    //}
+    if (widescreen_flag) {
+        print_generic_string(2, 21, textCurrRatio169);
+    } else {
+		print_generic_string(2, 21, textCurrRatio43);
+    }
+    if (gPlayer1Controller->buttonPressed & L_TRIG){
+        widescreen_flag ^= 1;
+    }
     gSPDisplayList(gDisplayListHead++, dl_ia_text_end);
 }
 

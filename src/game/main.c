@@ -41,6 +41,9 @@ OSMesg gSIEventMesgBuf[1];
 OSMesg gIntrMesgBuf[16];
 OSMesg gUnknownMesgBuf[16];
 
+int widescreen_flag = 0;
+int camera_invert = 0;
+
 struct VblankHandler *gVblankHandler1 = NULL;
 struct VblankHandler *gVblankHandler2 = NULL;
 struct SPTask *gActiveSPTask = NULL;
