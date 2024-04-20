@@ -2487,12 +2487,12 @@ void render_pause_red_coins(void) {
 }
 
 void render_cam_and_aspect_setting(void) {
-    //gSPDisplayList(gDisplayListHead++, dl_ia_text_begin);
-    //gDPSetEnvColor(gDisplayListHead++, 255, 255, 255, gDialogTextAlpha);
+    gSPDisplayList(gDisplayListHead++, dl_ia_text_begin);
+    gDPSetEnvColor(gDisplayListHead++, 255, 255, 255, 255); //gDialogTextAlpha);
     // camera
     //if (gConfig.widescreen) { //if (gConfig.caminvert) {
-		print_generic_string(10, 20, textCurrCamInv);
-		print_generic_string(10,  7, textPressR);
+	//	print_generic_string(10, 20, textCurrCamInv);
+	//	print_generic_string(10,  7, textPressR);
 	//} else {
 	//	print_generic_string(10, 20, textCurrCamReg);
     //    print_generic_string(10,  7, textPressL);
@@ -2501,18 +2501,18 @@ void render_cam_and_aspect_setting(void) {
     //    gConfig.widescreen ^= 1; //gConfig.caminvert ^= 1;
     //}
 	// aspect
-    /*if (gConfig.widescreen) {
+    //if (gConfig.widescreen) {
         print_generic_string(10, 20, textCurrRatio169);
         print_generic_string(10,  7, textPressL);
-    } else {
-		print_generic_string(10, 20, textCurrRatio43);
-        print_generic_string(10,  7, textPressL);
-    }
-    if (gPlayer1Controller->buttonPressed & L_TRIG){
-        gConfig.widescreen ^= 1;
-        save_file_set_widescreen_mode(gConfig.widescreen);
-    }*/
-    //gSPDisplayList(gDisplayListHead++, dl_ia_text_end);
+    //} else {
+	//	print_generic_string(10, 20, textCurrRatio43);
+    //    print_generic_string(10,  7, textPressL);
+    //}
+    //if (gPlayer1Controller->buttonPressed & L_TRIG){
+    //    gConfig.widescreen ^= 1;
+    //    save_file_set_widescreen_mode(gConfig.widescreen);
+    //}
+    gSPDisplayList(gDisplayListHead++, dl_ia_text_end);
 }
 
 #ifdef VERSION_EU
@@ -2755,6 +2755,8 @@ void render_pause_course_options(s16 x, s16 y, s8 *index, s16 yIndex) {
 
     handle_menu_scrolling(MENU_SCROLL_VERTICAL, index, 1, 2); //3);
 
+	render_cam_and_aspect_setting(); // added this to render cam and aspect in pause menu in levels
+	
     gSPDisplayList(gDisplayListHead++, dl_ia_text_begin);
     gDPSetEnvColor(gDisplayListHead++, 255, 255, 255, gMenuTextAlpha);
 
@@ -2779,7 +2781,7 @@ void render_pause_course_options(s16 x, s16 y, s8 *index, s16 yIndex) {
 
 void render_pause_castle_menu_box(s16 x, s16 y) {
 	
-	render_cam_and_aspect_setting();
+	render_cam_and_aspect_setting(); // added this to render cam and aspect in pause menu outside levels
 	
     create_dl_translation_matrix(MENU_MTX_PUSH, x - 78, y - 32, 0);
     create_dl_scale_matrix(MENU_MTX_NOPUSH, 1.2f, 0.8f, 1.0f);
@@ -3008,7 +3010,7 @@ s8 gHudFlash = 0;
 s16 render_pause_screen(void) {
     s16 index;
 	
-	render_cam_and_aspect_setting();
+	//render_cam_and_aspect_setting(); // here I first added the cam and aspect pause menu in levels, but the other menu made it more dim, so I moved this
 		
 #ifdef VERSION_EU
     gInGameLanguage = eu_get_language();
