@@ -1,6 +1,8 @@
 #ifndef GFX_DIMENSIONS_H
 #define GFX_DIMENSIONS_H
 
+#define WIDESCREEN
+
 /*
 
 This file is for ports that want to enable widescreen.
@@ -24,7 +26,7 @@ Note that RECT commands must be enhanced to support negative coordinates with th
 */
 
 
-//#ifdef WIDESCREEN
+#ifdef WIDESCREEN
 	#include <math.h>
 	#define GFX_DIMENSIONS_FROM_LEFT_EDGE(v) (SCREEN_WIDTH / 2 - SCREEN_HEIGHT / 2 * (16.0f / 9.0f) + (v))
 	#define GFX_DIMENSIONS_FROM_RIGHT_EDGE(v) (SCREEN_WIDTH / 2 + SCREEN_HEIGHT / 2 * (16.0f / 9.0f) - (v))
@@ -33,13 +35,13 @@ Note that RECT commands must be enhanced to support negative coordinates with th
 	#define GFX_DIMENSIONS_RECT_FROM_LEFT_EDGE(v) ((int)GFX_DIMENSIONS_FROM_LEFT_EDGE(v))
 	#define GFX_DIMENSIONS_RECT_FROM_RIGHT_EDGE(v) ((int)GFX_DIMENSIONS_FROM_RIGHT_EDGE(v))
 	#define GFX_DIMENSIONS_ASPECT_RATIO (16.0f / 9.0f)
-//#else
-/*	#define GFX_DIMENSIONS_FROM_LEFT_EDGE(v) (v)
+#else
+	#define GFX_DIMENSIONS_FROM_LEFT_EDGE(v) (v)
 	#define GFX_DIMENSIONS_FROM_RIGHT_EDGE(v) (SCREEN_WIDTH - (v))
 	#define GFX_DIMENSIONS_RECT_FROM_LEFT_EDGE(v) (v)
 	#define GFX_DIMENSIONS_RECT_FROM_RIGHT_EDGE(v) (SCREEN_WIDTH - (v))
-	#define GFX_DIMENSIONS_ASPECT_RATIO (4.0f / 3.0f) */
-//#endif
+	#define GFX_DIMENSIONS_ASPECT_RATIO (4.0f / 3.0f)
+#endif
 
 
 // If screen is taller than it is wide, radius should be equal to SCREEN_HEIGHT since we scale horizontally
