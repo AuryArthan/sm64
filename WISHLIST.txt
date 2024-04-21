@@ -1,4 +1,5 @@
 get goddart back
 get peach cutscene back but skippable (like goddart)
-toggle invert camera in pause menu
+DONE	toggle invert camera in pause menu
 toggle wide 16:9 in the pause menu
+add 'option' instead of 'stereo' like in EU version

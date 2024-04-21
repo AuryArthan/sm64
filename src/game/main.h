@@ -3,6 +3,8 @@
 
 #include "config.h"
 
+#define WIDESCREEN
+
 extern int widescreen_flag;
 extern int camera_invert;
 
