@@ -2546,9 +2546,9 @@ void render_cam_and_aspect_setting(void) {
     gDPSetEnvColor(gDisplayListHead++, 255, 255, 255, 255);
     // camera
     if (camera_invert) { 
-		print_generic_string(6, 10, textCurrCamInv);
+		print_generic_string(7, 7, textCurrCamInv);
 	} else {
-		print_generic_string(6, 10, textCurrCamReg);
+		print_generic_string(7, 7, textCurrCamReg);
 	}
 	if (gPlayer1Controller->buttonPressed & R_TRIG){
         camera_invert ^= 1;
@@ -2556,9 +2556,9 @@ void render_cam_and_aspect_setting(void) {
     }
 	// aspect
     if (widescreen_flag) {
-        print_generic_string(6, 24, textCurrRatio169);
+        print_generic_string(7, 21, textCurrRatio169);
     } else {
-		print_generic_string(6, 24, textCurrRatio43);
+		print_generic_string(7, 21, textCurrRatio43);
     }
     if (gPlayer1Controller->buttonPressed & L_TRIG){
         widescreen_flag ^= 1;

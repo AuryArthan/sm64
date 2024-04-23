@@ -14,6 +14,9 @@
 #include "save_file.h"
 #include "print.h"
 
+int hud_shift_right = 13;
+int hud_shift_up = 8;
+
 /* @file hud.c
  * This file implements HUD rendering and power meter animations.
  * That includes stars, lives, coins, camera status, power meter, timer
@@ -160,8 +163,8 @@ static void animate_power_meter_deemphasizing(void) {
 
     sPowerMeterHUD.y += speed;
 
-    if (sPowerMeterHUD.y > 200) {
-        sPowerMeterHUD.y = 200;
+    if (sPowerMeterHUD.y > 200+hud_shift_up) {
+        sPowerMeterHUD.y = 200+hud_shift_up;
         sPowerMeterHUD.animation = POWER_METER_VISIBLE;
     }
 }
@@ -251,7 +254,7 @@ void render_hud_power_meter(void) {
 #ifdef VERSION_JP
 #define HUD_TOP_Y 210
 #else
-#define HUD_TOP_Y 209
+#define HUD_TOP_Y 209 +hud_shift_up
 #endif
 
 /**
@@ -267,15 +270,19 @@ void render_hud_mario_lives(void) {
  * Renders the amount of coins collected.
  */
 void render_hud_coins(void) {
-    print_text(168, HUD_TOP_Y, "+"); // 'Coin' glyph
-    print_text(184, HUD_TOP_Y, "*"); // 'X' glyph
-    print_text_fmt_int(198, HUD_TOP_Y, "%d", gHudDisplay.coins);
+    //print_text(168, HUD_TOP_Y, "+"); // 'Coin' glyph
+    //print_text(184, HUD_TOP_Y, "*"); // 'X' glyph
+    //print_text_fmt_int(198, HUD_TOP_Y, "%d", gHudDisplay.coins);
+    print_text(168+hud_shift_right, HUD_TOP_Y, "+"); // 'Coin' glyph
+    print_text(184+hud_shift_right, HUD_TOP_Y, "*"); // 'X' glyph
+    print_text_fmt_int(198+hud_shift_right, HUD_TOP_Y, "%d", gHudDisplay.coins);
 }
 
 #ifdef VERSION_JP
 #define HUD_STARS_X 73
 #else
-#define HUD_STARS_X 78
+//#define HUD_STARS_X 78
+#define HUD_STARS_X 78-hud_shift_right
 #endif
 
 /**
@@ -343,16 +350,20 @@ void render_hud_timer(void) {
     timeString[1] = 0x00;
     print_text_centered(GFX_DIMENSIONS_RECT_FROM_RIGHT_EDGE(150), 185, (const char *) timeString);
 #else
-    print_text(GFX_DIMENSIONS_RECT_FROM_RIGHT_EDGE(150), 185, "TIME");
+    //print_text(GFX_DIMENSIONS_RECT_FROM_RIGHT_EDGE(150), 185, "TIME");
+    print_text(GFX_DIMENSIONS_RECT_FROM_RIGHT_EDGE(150)+hud_shift_right, 185+hud_shift_up, "TIME");
 #endif
 
-    print_text_fmt_int(GFX_DIMENSIONS_RECT_FROM_RIGHT_EDGE(91), 185, "%0d", timerMins);
-    print_text_fmt_int(GFX_DIMENSIONS_RECT_FROM_RIGHT_EDGE(71), 185, "%02d", timerSecs);
-    print_text_fmt_int(GFX_DIMENSIONS_RECT_FROM_RIGHT_EDGE(37), 185, "%d", timerFracSecs);
-
+    //print_text_fmt_int(GFX_DIMENSIONS_RECT_FROM_RIGHT_EDGE(91), 185, "%0d", timerMins);
+    //print_text_fmt_int(GFX_DIMENSIONS_RECT_FROM_RIGHT_EDGE(71), 185, "%02d", timerSecs);
+    //print_text_fmt_int(GFX_DIMENSIONS_RECT_FROM_RIGHT_EDGE(37), 185, "%d", timerFracSecs);
+	print_text_fmt_int(GFX_DIMENSIONS_RECT_FROM_RIGHT_EDGE(91)+hud_shift_right, 185+hud_shift_up, "%0d", timerMins);
+    print_text_fmt_int(GFX_DIMENSIONS_RECT_FROM_RIGHT_EDGE(71)+hud_shift_right, 185+hud_shift_up, "%02d", timerSecs);
+    print_text_fmt_int(GFX_DIMENSIONS_RECT_FROM_RIGHT_EDGE(37)+hud_shift_right, 185+hud_shift_up, "%d", timerFracSecs);
+    
     gSPDisplayList(gDisplayListHead++, dl_hud_img_begin);
-    render_hud_tex_lut(GFX_DIMENSIONS_RECT_FROM_RIGHT_EDGE(81), 32, (*hudLUT)[GLYPH_APOSTROPHE]);
-    render_hud_tex_lut(GFX_DIMENSIONS_RECT_FROM_RIGHT_EDGE(46), 32, (*hudLUT)[GLYPH_DOUBLE_QUOTE]);
+    render_hud_tex_lut(GFX_DIMENSIONS_RECT_FROM_RIGHT_EDGE(81)+hud_shift_right, 32-hud_shift_up, (*hudLUT)[GLYPH_APOSTROPHE]);
+    render_hud_tex_lut(GFX_DIMENSIONS_RECT_FROM_RIGHT_EDGE(46)+hud_shift_right, 32-hud_shift_up, (*hudLUT)[GLYPH_DOUBLE_QUOTE]);
     gSPDisplayList(gDisplayListHead++, dl_hud_img_end);
 }
 
