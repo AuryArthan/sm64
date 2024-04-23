@@ -44,7 +44,7 @@ ifeq      ($(VERSION),jp)
   VERSION_SH_CN  ?= false
 else ifeq ($(VERSION),us)
   DEFINES   += VERSION_US=1
-  OPT_FLAGS := -g
+  OPT_FLAGS := -O2
   GRUCODE   ?= f3d_old
   VERSION_JP_US  ?= true
   VERSION_SH_CN  ?= false
