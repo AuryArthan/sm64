@@ -1,7 +1,7 @@
 #ifndef GFX_DIMENSIONS_H
 #define GFX_DIMENSIONS_H
 
-#define WIDESCREEN
+//#define WIDESCREEN
 
 /*
 
