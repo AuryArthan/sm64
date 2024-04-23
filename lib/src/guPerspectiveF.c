@@ -8,7 +8,7 @@ void guPerspectiveF(float mf[4][4], u16 *perspNorm, float fovy, float aspect, fl
     guMtxIdentF(mf);
     fovy *= GU_PI / 180.0;
     yscale = cosf(fovy / 2) / sinf(fovy / 2);
-    mf[0][0] = yscale / aspect;
+    mf[0][0] = yscale / aspect; // minus here makes it mirrored, but the tectures render on back of surfaces
     mf[1][1] = yscale;
     mf[2][2] = (near + far) / (near - far);
     mf[2][3] = -1;
