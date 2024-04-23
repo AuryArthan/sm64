@@ -248,7 +248,8 @@ static void geo_process_perspective(struct GraphNodePerspective *node) {
         f32 aspect = ((f32) gCurGraphNodeRoot->width / (f32) gCurGraphNodeRoot->height) * 1.1f;
 #else
         //f32 aspect = (f32) gCurGraphNodeRoot->width / (f32) gCurGraphNodeRoot->height;
-		aspect = 1.777f; // !!!
+		if(widescreen_flag) aspect = 1.7777f;
+		else aspect = 1.3333f;
 #endif
 
         guPerspective(mtx, &perspNorm, node->fov, aspect, node->near, node->far, 1.0f);
@@ -761,7 +762,7 @@ static s32 obj_is_in_view(struct GraphNodeObject *node, Mat4 matrix) {
     // ! @bug The aspect ratio is not accounted for. When the fov value is 45,
     // the horizontal effective fov is actually 60 degrees, so you can see objects
     // visibly pop in or out at the edge of the screen.
-    halfFov = (gCurGraphNodeCamFrustum->fov / 2.0f + 1.0f) * 32768.0f / 180.0f + 0.5f;
+    //halfFov = (gCurGraphNodeCamFrustum->fov / 2.0f + 1.0f) * 32768.0f / 180.0f + 0.5f;
 	halfFov = (gCurGraphNodeCamFrustum->fov*aspect / 2.0f + 1.0f) * 32768.0f / 180.0f + 0.5f;
 
     hScreenEdge = -matrix[3][2] * sins(halfFov) / coss(halfFov);
