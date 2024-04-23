@@ -19,6 +19,7 @@
 #include "sm64.h"
 #include "star_select.h"
 #include "text_strings.h"
+#include "custom_flags.h"
 
 /**
  * @file star_select.c
@@ -108,7 +109,7 @@ void bhv_act_selector_init(void) {
     s16 i = 0;
     s32 selectorModelIDs[10];
     u8 stars = save_file_get_star_flags(gCurrSaveFileNum - 1, COURSE_NUM_TO_INDEX(gCurrCourseNum));
-
+	
     sVisibleStars = 0;
     while (i != sObtainedStars) {
         if (stars & (1 << sVisibleStars)) { // Star has been collected
@@ -155,6 +156,7 @@ void bhv_act_selector_init(void) {
     }
 
     render_100_coin_star(stars);
+    
 }
 
 /**
@@ -169,6 +171,9 @@ void bhv_act_selector_loop(void) {
     u8 starIndexCounter;
     u8 stars = save_file_get_star_flags(gCurrSaveFileNum - 1, COURSE_NUM_TO_INDEX(gCurrCourseNum));
 
+	//f32 old_aspect_multiplier = aspect_multiplier;
+	aspect_multiplier = 1.0f;
+	
     if (sObtainedStars != 6) {
         // Sometimes, stars are not selectable even if they appear on the screen.
         // This code filters selectable and non-selectable stars.

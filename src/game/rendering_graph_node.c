@@ -10,6 +10,7 @@
 #include "rendering_graph_node.h"
 #include "shadow.h"
 #include "sm64.h"
+#include "custom_flags.h"
 
 /**
  * This file contains the code that processes the scene graph for rendering.
