@@ -5,6 +5,7 @@
 
 extern int widescreen_flag;
 extern int camera_invert;
+extern f32 aspect_multiplier;
 
 extern OSThread D_80339210;
 extern OSThread gIdleThread;

@@ -43,6 +43,7 @@ OSMesg gUnknownMesgBuf[16];
 
 int widescreen_flag = 0;
 int camera_invert = 0;
+f32 aspect_multiplier = 1.08f;
 
 struct VblankHandler *gVblankHandler1 = NULL;
 struct VblankHandler *gVblankHandler2 = NULL;
