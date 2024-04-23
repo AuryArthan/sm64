@@ -1780,7 +1780,7 @@ enum {
     INTRO_CUTSCENE_SET_MARIO_TO_IDLE
 };
 
-static s32 act_intro_cutscene(struct MarioState *m) {
+static s32 act_intro_cutscene(struct MarioState *m) { // this is the intro peach-lakitu cutscene
     switch (m->actionArg) {
         case INTRO_CUTSCENE_HIDE_HUD_AND_MARIO:
             intro_cutscene_hide_hud_and_mario(m);
