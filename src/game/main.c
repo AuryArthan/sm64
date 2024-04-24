@@ -12,7 +12,7 @@
 #include "segment_symbols.h"
 #include "main.h"
 #include "rumble_init.h"
-#include "custom_flags.h"
+#include "custom_globals.h"
 
 // Message IDs
 #define MESG_SP_COMPLETE 100
@@ -44,7 +44,7 @@ OSMesg gUnknownMesgBuf[16];
 
 int widescreen_flag = 0;
 int camera_invert = 0;
-f32 aspect_multiplier = 2.408f;
+f32 aspect;
 
 struct VblankHandler *gVblankHandler1 = NULL;
 struct VblankHandler *gVblankHandler2 = NULL;

@@ -21,7 +21,6 @@
 #include "game/rumble_init.h"
 #include "sm64.h"
 #include "text_strings.h"
-#include "custom_flags.h"
 
 #include "eu_translation.h"
 #ifdef VERSION_EU
@@ -1334,7 +1333,6 @@ void load_erase_menu_from_submenu(s16 prevMenuButtonID, struct Object *sourceBut
  * Unlike buttons on submenus, these are never hidden or recreated.
  */
 void bhv_menu_button_manager_init(void) {
-	aspect_multiplier = 1.0f;
     // File A
     if (save_file_exists(SAVE_FILE_A) == TRUE) {
         sMainMenuButtons[MENU_BUTTON_PLAY_FILE_A] =

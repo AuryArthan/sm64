@@ -10,7 +10,7 @@
 #include "rendering_graph_node.h"
 #include "shadow.h"
 #include "sm64.h"
-#include "custom_flags.h"
+#include "custom_globals.h"
 
 /**
  * This file contains the code that processes the scene graph for rendering.
@@ -40,7 +40,6 @@
 s16 gMatStackIndex;
 Mat4 gMatStack[32];
 Mtx *gMatStackFixed[32];
-f32 aspect;
 
 /**
  * Animation nodes have state in global variables, so this struct captures
@@ -249,8 +248,8 @@ static void geo_process_perspective(struct GraphNodePerspective *node) {
         f32 aspect = ((f32) gCurGraphNodeRoot->width / (f32) gCurGraphNodeRoot->height) * 1.1f;
 #else
         //f32 aspect = (f32) gCurGraphNodeRoot->width / (f32) gCurGraphNodeRoot->height;
-		if(widescreen_flag) aspect = (16.0f / 9.0f) * aspect_multiplier;
-		else aspect = (4.0f / 3.0f) * aspect_multiplier;
+		if(widescreen_flag) aspect = (16.0f / 9.0f);
+		else aspect = (4.0f / 3.0f);
 #endif
 
         guPerspective(mtx, &perspNorm, node->fov, aspect, node->near, node->far, 1.0f);

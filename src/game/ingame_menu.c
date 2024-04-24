@@ -22,7 +22,7 @@
 #include "sm64.h"
 #include "text_strings.h"
 #include "types.h"
-#include "main.h"
+#include "custom_globals.h"
 
 #ifdef VERSION_EU
 #undef LANGUAGE_FUNCTION

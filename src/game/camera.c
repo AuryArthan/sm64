@@ -28,7 +28,7 @@
 #include "paintings.h"
 #include "engine/graph_node.h"
 #include "level_table.h"
-#include "main.h"
+#include "custom_globals.h"
 
 #define CBUTTON_MASK (U_CBUTTONS | D_CBUTTONS | L_CBUTTONS | R_CBUTTONS)
 
