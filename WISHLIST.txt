@@ -1,16 +1,2 @@
-get goddart back
-get peach cutscene back but skippable (like goddart)
-DONE	toggle invert camera in pause menu
-DONE	widescreen (see https://github.com/Reonu/sm64-widescreen/commit/8ca1d81738d96c5a3b78c757d1720cf05afdfa79)
-DONE	toggle wide 16:9 in the pause menu
-(adjust the menu when 16:9 somehow)
-add 'option' instead of 'stereo' like in EU version
-	maybe add also the japanese language if its not too hard (and also the JRB unique portrait)
-	add alos the widescreen option there so you can maybe see the peach intro cutscene in widescreen?
-	add also the option to mirror screen (and invert controls) to offer a fresh experience
-	so in the end maybe it would be: OPTIONS:
-										LANGUAGES
-										ENG		FRE		GER		JAP
-										SCREEN RATIO		MIRROR SCREEN
-										4:3		16:9		REGULAR		MIRRORED
-squish the intro logo a bit, but not as much as in the vanilla European version
+get peach cutscene back (but skippable)
+mirror screen option toggleable in pause menu
