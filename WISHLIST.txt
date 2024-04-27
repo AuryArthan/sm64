@@ -1,2 +1,2 @@
-get peach cutscene back (but skippable)
+make peach cutscene skippable
 mirror screen option toggleable in pause menu
