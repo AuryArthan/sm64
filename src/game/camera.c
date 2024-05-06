@@ -1832,7 +1832,7 @@ s32 update_behind_mario_camera(struct Camera *c, Vec3f focus, Vec3f pos) {
         if (dist < maxDist) {
             camera_approach_f32_symmetric_bool(&dist, maxDist, 5.f);
         }
-        goalYawOff = -0x3FF8;
+        goalYawOff = -(2*camera_invert-1)*0x3FF8;
         sCSideButtonYaw = 30;
         yawSpeed = 2;
     }
@@ -1844,7 +1844,7 @@ s32 update_behind_mario_camera(struct Camera *c, Vec3f focus, Vec3f pos) {
         if (dist < maxDist) {
             camera_approach_f32_symmetric_bool(&dist, maxDist, 5.f);
         }
-        goalYawOff = 0x3FF8;
+        goalYawOff = (2*camera_invert-1)*0x3FF8;
         sCSideButtonYaw = 30;
         yawSpeed = 2;
     }
