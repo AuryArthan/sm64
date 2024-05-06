@@ -1,1 +1,2 @@
 - Dire Dire Docks seems to change to Lakitu cam, and from there on the camera is kind of broken
+	- It appeas that going through the tunnel is breaking it, and on the other side even if you exit course it stays with you. The good news is that it works when youre in the water and when you go back the tunel (even if you exit there)
