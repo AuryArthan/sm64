@@ -1,2 +1,1 @@
-- wing cap camera is bad, should be replaced with stock
 - Dire Dire Docks seems to change to Lakitu cam, and from there on the camera is kind of broken

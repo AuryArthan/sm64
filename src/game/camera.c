@@ -3051,7 +3051,7 @@ void update_camera(struct Camera *c) {
 
     c->yaw = gLakituState.yaw;
     c->nextYaw = gLakituState.nextYaw;
-    if(gLakituState.mode == CAMERA_MODE_INSIDE_CANNON || gLakituState.mode == 6) c->mode = gLakituState.mode;
+    if(gLakituState.mode == CAMERA_MODE_INSIDE_CANNON || gLakituState.mode == CAMERA_MODE_BEHIND_MARIO || gLakituState.mode == 6) c->mode = gLakituState.mode;
     else c->mode = 4;
     c->defMode = gLakituState.defMode;
 
