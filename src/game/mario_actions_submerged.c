@@ -146,7 +146,7 @@ static void apply_water_current(struct MarioState *m, Vec3f step) {
             yawToWhirlpool -= (s16)(0x2000 * 1000.0f / (distance + 1000.0f));
 
             if (whirlpool->strength >= 0) {
-                if (gCurrLevelNum == LEVEL_DDD && gCurrAreaIndex == 2) {
+                if (gCurrLevelNum == LEVEL_DDD && gCurrAreaIndex == 2) {	// this doesnt solve the DDD camera breakage issue either...
                     whirlpoolRadius = 4000.0f;
                 }
 
