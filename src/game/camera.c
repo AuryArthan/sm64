@@ -5629,8 +5629,8 @@ void check_blocking_area_processing(const u8 *mode) {
         sStatusFlags |= CAM_FLAG_BLOCK_AREA_PROCESSING;
     }
 
-    if (gCurrLevelNum == LEVEL_DDD || gCurrLevelNum == LEVEL_WDW || gCurrLevelNum == LEVEL_COTMC) {
-        sStatusFlags &= ~CAM_FLAG_BLOCK_AREA_PROCESSING;
+    if (gCurrLevelNum == LEVEL_DDD || gCurrLevelNum == LEVEL_WDW || gCurrLevelNum == LEVEL_COTMC) {		// this looks suspicious, and I would guess it causes the camera to break in DDD. However, commenting it out does not resolve the issue
+        sStatusFlags &= ~CAM_FLAG_BLOCK_AREA_PROCESSING;	
     }
 
     if ((*mode == CAMERA_MODE_BEHIND_MARIO &&
