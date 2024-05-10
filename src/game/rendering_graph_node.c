@@ -248,7 +248,8 @@ static void geo_process_perspective(struct GraphNodePerspective *node) {
         f32 aspect = ((f32) gCurGraphNodeRoot->width / (f32) gCurGraphNodeRoot->height) * 1.1f;
 #else
         //f32 aspect = (f32) gCurGraphNodeRoot->width / (f32) gCurGraphNodeRoot->height;
-		if(widescreen_flag) aspect = (16.0f / 9.0f) * 1.1f;
+        if(widescreen_flag == 2) aspect = (64.0f / 27.0f) * 1.1f;
+		else if(widescreen_flag == 1) aspect = (16.0f / 9.0f) * 1.1f;
 		else aspect = (4.0f / 3.0f) * 1.1f;
 #endif
 

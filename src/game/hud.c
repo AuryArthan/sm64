@@ -116,14 +116,18 @@ void render_dl_power_meter(s16 numHealthWedges) {
 
     gSPMatrix(gDisplayListHead++, VIRTUAL_TO_PHYSICAL(mtx++),
               G_MTX_MODELVIEW | G_MTX_MUL | G_MTX_PUSH);
-    if(widescreen_flag){
+    if(widescreen_flag == 2){
+		gSPDisplayList(gDisplayListHead++, &dl_power_meter_base_UWS);
+	}else if(widescreen_flag == 1){
 		gSPDisplayList(gDisplayListHead++, &dl_power_meter_base_WS);
 	}else{
 		gSPDisplayList(gDisplayListHead++, &dl_power_meter_base);
 	}
 
     if (numHealthWedges != 0) {
-		if(widescreen_flag){
+		if(widescreen_flag == 2){
+			gSPDisplayList(gDisplayListHead++, &dl_power_meter_health_segments_begin_UWS);
+		}else if(widescreen_flag == 1){
 			gSPDisplayList(gDisplayListHead++, &dl_power_meter_health_segments_begin_WS);
 		}else{
 			gSPDisplayList(gDisplayListHead++, &dl_power_meter_health_segments_begin);

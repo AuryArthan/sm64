@@ -43,6 +43,7 @@ s8 gRedCoinsCollected;
 // pause menu toggle
 u8 textCurrRatio43[] = { TEXT_HUD_CURRENT_RATIO_43 };
 u8 textCurrRatio169[] = { TEXT_HUD_CURRENT_RATIO_169 };
+u8 textCurrRatio219[] = { TEXT_HUD_CURRENT_RATIO_219 };
 u8 textCurrCamReg[] = { TEXT_HUD_CURRENT_CAMERA_REG };
 u8 textCurrCamInv[] = { TEXT_HUD_CURRENT_CAMERA_INV };
 // mario pic in pause menu (cant print that many dots, there is a limit to characters on the screen)
@@ -2555,13 +2556,16 @@ void render_cam_and_aspect_setting(void) {
         play_sound_rbutton_changed();
     }
 	// aspect
-    if (widescreen_flag) {
+	if (widescreen_flag == 2) {
+		print_generic_string(7, 21, textCurrRatio219);
+	}else if (widescreen_flag == 1) {
         print_generic_string(7, 21, textCurrRatio169);
     } else {
 		print_generic_string(7, 21, textCurrRatio43);
     }
     if (gPlayer1Controller->buttonPressed & L_TRIG){
-        widescreen_flag ^= 1;
+        ///widescreen_flag ^= 1;
+        widescreen_flag = (widescreen_flag+1)%3;
         play_sound_rbutton_changed();
     }
     gSPDisplayList(gDisplayListHead++, dl_ia_text_end);
