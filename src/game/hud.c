@@ -37,7 +37,7 @@ static s16 sPowerMeterStoredHealth;
 
 static struct PowerMeterHUD sPowerMeterHUD = {
     POWER_METER_HIDDEN,
-    31, //140,
+    33, //140,
     166,
     1.0,
 };
@@ -111,8 +111,10 @@ void render_dl_power_meter(s16 numHealthWedges) {
     if (mtx == NULL) {
         return;
     }
-
-    guTranslate(mtx, (f32) sPowerMeterHUD.x, (f32) sPowerMeterHUD.y, 0);
+	
+    if(widescreen_flag == 2) guTranslate(mtx, (f32) sPowerMeterHUD.x-13, (f32) sPowerMeterHUD.y, 0);
+    else if(widescreen_flag == 1) guTranslate(mtx, (f32) sPowerMeterHUD.x-8, (f32) sPowerMeterHUD.y, 0);
+    else guTranslate(mtx, (f32) sPowerMeterHUD.x, (f32) sPowerMeterHUD.y, 0);
 
     gSPMatrix(gDisplayListHead++, VIRTUAL_TO_PHYSICAL(mtx++),
               G_MTX_MODELVIEW | G_MTX_MUL | G_MTX_PUSH);
