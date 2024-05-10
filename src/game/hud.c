@@ -13,6 +13,7 @@
 #include "area.h"
 #include "save_file.h"
 #include "print.h"
+#include "custom_globals.h"
 
 int hud_shift_right = 13;
 int hud_shift_up = 8;
@@ -115,10 +116,18 @@ void render_dl_power_meter(s16 numHealthWedges) {
 
     gSPMatrix(gDisplayListHead++, VIRTUAL_TO_PHYSICAL(mtx++),
               G_MTX_MODELVIEW | G_MTX_MUL | G_MTX_PUSH);
-    gSPDisplayList(gDisplayListHead++, &dl_power_meter_base);
+    if(widescreen_flag){
+		gSPDisplayList(gDisplayListHead++, &dl_power_meter_base_WS);
+	}else{
+		gSPDisplayList(gDisplayListHead++, &dl_power_meter_base);
+	}
 
     if (numHealthWedges != 0) {
-        gSPDisplayList(gDisplayListHead++, &dl_power_meter_health_segments_begin);
+		if(widescreen_flag){
+			gSPDisplayList(gDisplayListHead++, &dl_power_meter_health_segments_begin_WS);
+		}else{
+			gSPDisplayList(gDisplayListHead++, &dl_power_meter_health_segments_begin);
+		}
         render_power_meter_health_segment(numHealthWedges);
         gSPDisplayList(gDisplayListHead++, &dl_power_meter_health_segments_end);
     }
