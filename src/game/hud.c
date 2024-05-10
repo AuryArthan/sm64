@@ -15,7 +15,7 @@
 #include "print.h"
 #include "custom_globals.h"
 
-int hud_shift_right = 13;
+int hud_shift_right = 17;
 int hud_shift_up = 8;
 
 /* @file hud.c
@@ -288,9 +288,19 @@ void render_hud_coins(void) {
     //print_text(168, HUD_TOP_Y, "+"); // 'Coin' glyph
     //print_text(184, HUD_TOP_Y, "*"); // 'X' glyph
     //print_text_fmt_int(198, HUD_TOP_Y, "%d", gHudDisplay.coins);
-    print_text(168+hud_shift_right, HUD_TOP_Y, "+"); // 'Coin' glyph
-    print_text(184+hud_shift_right, HUD_TOP_Y, "*"); // 'X' glyph
-    print_text_fmt_int(198+hud_shift_right, HUD_TOP_Y, "%d", gHudDisplay.coins);
+    if(widescreen_flag == 2){
+		print_text(168+hud_shift_right+20, HUD_TOP_Y, "+"); // 'Coin' glyph
+		print_text(184+hud_shift_right+16, HUD_TOP_Y, "*"); // 'X' glyph
+		print_text_fmt_int(198+hud_shift_right+12, HUD_TOP_Y, "%d", gHudDisplay.coins);
+	}else if(widescreen_flag == 1){
+		print_text(168+hud_shift_right+12, HUD_TOP_Y, "+"); // 'Coin' glyph
+		print_text(184+hud_shift_right+10, HUD_TOP_Y, "*"); // 'X' glyph
+		print_text_fmt_int(198+hud_shift_right+8, HUD_TOP_Y, "%d", gHudDisplay.coins);
+    }else{
+		print_text(168+hud_shift_right, HUD_TOP_Y, "+"); // 'Coin' glyph
+		print_text(184+hud_shift_right, HUD_TOP_Y, "*"); // 'X' glyph
+		print_text_fmt_int(198+hud_shift_right, HUD_TOP_Y, "%d", gHudDisplay.coins);
+	}
 }
 
 #ifdef VERSION_JP
@@ -315,9 +325,21 @@ void render_hud_stars(void) {
         showX = 1;
     }
 
-    print_text(GFX_DIMENSIONS_RECT_FROM_RIGHT_EDGE(HUD_STARS_X), HUD_TOP_Y, "-"); // 'Star' glyph
+	if(widescreen_flag == 2){
+		print_text(GFX_DIMENSIONS_RECT_FROM_RIGHT_EDGE(HUD_STARS_X)+7, HUD_TOP_Y, "-"); // 'Star' glyph
+	}else if(widescreen_flag == 1){
+		print_text(GFX_DIMENSIONS_RECT_FROM_RIGHT_EDGE(HUD_STARS_X)+4, HUD_TOP_Y, "-"); // 'Star' glyph
+    }else{
+		print_text(GFX_DIMENSIONS_RECT_FROM_RIGHT_EDGE(HUD_STARS_X), HUD_TOP_Y, "-"); // 'Star' glyph
+	}
     if (showX == 1) {
-        print_text(GFX_DIMENSIONS_RECT_FROM_RIGHT_EDGE(HUD_STARS_X) + 16, HUD_TOP_Y, "*"); // 'X' glyph
+        if(widescreen_flag == 2){
+			print_text(GFX_DIMENSIONS_RECT_FROM_RIGHT_EDGE(HUD_STARS_X) + 16 +6, HUD_TOP_Y, "*"); // 'X' glyph
+		}else if(widescreen_flag == 1){
+			print_text(GFX_DIMENSIONS_RECT_FROM_RIGHT_EDGE(HUD_STARS_X) + 16 +3, HUD_TOP_Y, "*"); // 'X' glyph
+		}else{
+			print_text(GFX_DIMENSIONS_RECT_FROM_RIGHT_EDGE(HUD_STARS_X) + 16, HUD_TOP_Y, "*"); // 'X' glyph
+		}
     }
     print_text_fmt_int((showX * 14) + GFX_DIMENSIONS_RECT_FROM_RIGHT_EDGE(HUD_STARS_X - 16),
                        HUD_TOP_Y, "%d", gHudDisplay.stars);
@@ -366,19 +388,43 @@ void render_hud_timer(void) {
     print_text_centered(GFX_DIMENSIONS_RECT_FROM_RIGHT_EDGE(150), 185, (const char *) timeString);
 #else
     //print_text(GFX_DIMENSIONS_RECT_FROM_RIGHT_EDGE(150), 185, "TIME");
-    print_text(GFX_DIMENSIONS_RECT_FROM_RIGHT_EDGE(150)+hud_shift_right, 185+hud_shift_up, "TIME");
+    if(widescreen_flag == 2){
+		print_text(GFX_DIMENSIONS_RECT_FROM_RIGHT_EDGE(150)+hud_shift_right+20, 185+hud_shift_up, "TIME");
+	}else if(widescreen_flag == 1){
+		print_text(GFX_DIMENSIONS_RECT_FROM_RIGHT_EDGE(150)+hud_shift_right+12, 185+hud_shift_up, "TIME");
+    }else{
+		print_text(GFX_DIMENSIONS_RECT_FROM_RIGHT_EDGE(150)+hud_shift_right, 185+hud_shift_up, "TIME");
+	}
 #endif
 
     //print_text_fmt_int(GFX_DIMENSIONS_RECT_FROM_RIGHT_EDGE(91), 185, "%0d", timerMins);
     //print_text_fmt_int(GFX_DIMENSIONS_RECT_FROM_RIGHT_EDGE(71), 185, "%02d", timerSecs);
     //print_text_fmt_int(GFX_DIMENSIONS_RECT_FROM_RIGHT_EDGE(37), 185, "%d", timerFracSecs);
-	print_text_fmt_int(GFX_DIMENSIONS_RECT_FROM_RIGHT_EDGE(91)+hud_shift_right, 185+hud_shift_up, "%0d", timerMins);
-    print_text_fmt_int(GFX_DIMENSIONS_RECT_FROM_RIGHT_EDGE(71)+hud_shift_right, 185+hud_shift_up, "%02d", timerSecs);
-    print_text_fmt_int(GFX_DIMENSIONS_RECT_FROM_RIGHT_EDGE(37)+hud_shift_right, 185+hud_shift_up, "%d", timerFracSecs);
+    if(widescreen_flag == 2){
+		print_text_fmt_int(GFX_DIMENSIONS_RECT_FROM_RIGHT_EDGE(91)+hud_shift_right+15, 185+hud_shift_up, "%0d", timerMins);
+		print_text_fmt_int(GFX_DIMENSIONS_RECT_FROM_RIGHT_EDGE(71)+hud_shift_right+11, 185+hud_shift_up, "%02d", timerSecs);
+		print_text_fmt_int(GFX_DIMENSIONS_RECT_FROM_RIGHT_EDGE(37)+hud_shift_right+8, 185+hud_shift_up, "%d", timerFracSecs);
+	}else if(widescreen_flag == 1){
+		print_text_fmt_int(GFX_DIMENSIONS_RECT_FROM_RIGHT_EDGE(91)+hud_shift_right+9, 185+hud_shift_up, "%0d", timerMins);
+		print_text_fmt_int(GFX_DIMENSIONS_RECT_FROM_RIGHT_EDGE(71)+hud_shift_right+7, 185+hud_shift_up, "%02d", timerSecs);
+		print_text_fmt_int(GFX_DIMENSIONS_RECT_FROM_RIGHT_EDGE(37)+hud_shift_right+6, 185+hud_shift_up, "%d", timerFracSecs);
+    }else{
+		print_text_fmt_int(GFX_DIMENSIONS_RECT_FROM_RIGHT_EDGE(91)+hud_shift_right, 185+hud_shift_up, "%0d", timerMins);
+		print_text_fmt_int(GFX_DIMENSIONS_RECT_FROM_RIGHT_EDGE(71)+hud_shift_right, 185+hud_shift_up, "%02d", timerSecs);
+		print_text_fmt_int(GFX_DIMENSIONS_RECT_FROM_RIGHT_EDGE(37)+hud_shift_right, 185+hud_shift_up, "%d", timerFracSecs);
+	}
     
     gSPDisplayList(gDisplayListHead++, dl_hud_img_begin);
-    render_hud_tex_lut(GFX_DIMENSIONS_RECT_FROM_RIGHT_EDGE(81)+hud_shift_right, 32-hud_shift_up, (*hudLUT)[GLYPH_APOSTROPHE]);
-    render_hud_tex_lut(GFX_DIMENSIONS_RECT_FROM_RIGHT_EDGE(46)+hud_shift_right, 32-hud_shift_up, (*hudLUT)[GLYPH_DOUBLE_QUOTE]);
+    if(widescreen_flag == 2){
+		render_hud_tex_lut(GFX_DIMENSIONS_RECT_FROM_RIGHT_EDGE(81)+hud_shift_right+13, 32-hud_shift_up, (*hudLUT)[GLYPH_APOSTROPHE]);
+		render_hud_tex_lut(GFX_DIMENSIONS_RECT_FROM_RIGHT_EDGE(46)+hud_shift_right+5, 32-hud_shift_up, (*hudLUT)[GLYPH_DOUBLE_QUOTE]);
+	}else if(widescreen_flag == 1){
+		render_hud_tex_lut(GFX_DIMENSIONS_RECT_FROM_RIGHT_EDGE(81)+hud_shift_right+8, 32-hud_shift_up, (*hudLUT)[GLYPH_APOSTROPHE]);
+		render_hud_tex_lut(GFX_DIMENSIONS_RECT_FROM_RIGHT_EDGE(46)+hud_shift_right+2, 32-hud_shift_up, (*hudLUT)[GLYPH_DOUBLE_QUOTE]);
+    }else{
+		render_hud_tex_lut(GFX_DIMENSIONS_RECT_FROM_RIGHT_EDGE(81)+hud_shift_right, 32-hud_shift_up, (*hudLUT)[GLYPH_APOSTROPHE]);
+		render_hud_tex_lut(GFX_DIMENSIONS_RECT_FROM_RIGHT_EDGE(46)+hud_shift_right, 32-hud_shift_up, (*hudLUT)[GLYPH_DOUBLE_QUOTE]);
+	}
     gSPDisplayList(gDisplayListHead++, dl_hud_img_end);
 }
 
