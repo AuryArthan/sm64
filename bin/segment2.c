@@ -10914,12 +10914,12 @@ ALIGNED8 static const Texture texture_hud_char_arrow_down[] = {
 
 // Main HUD print table 0x02008250-0x02008337
 const Texture *const main_hud_lut[] = {
-    texture_hud_char_0, texture_hud_char_1, texture_hud_char_2, texture_hud_char_3,
+    texture_hud_char_0, texture_hud_char_1, texture_hud_char_2, texture_hud_char_3,		// this is the main font
     texture_hud_char_4, texture_hud_char_5, texture_hud_char_6, texture_hud_char_7,
     texture_hud_char_8, texture_hud_char_9, texture_hud_char_A, texture_hud_char_B,
     texture_hud_char_C, texture_hud_char_D, texture_hud_char_E, texture_hud_char_F,
 #if defined(VERSION_EU)
-    texture_hud_char_G, texture_hud_char_H, texture_hud_char_I,                0x0,
+    texture_hud_char_G, texture_hud_char_H, texture_hud_char_I,                0x0,		// here no cause its europe
     texture_hud_char_K, texture_hud_char_L, texture_hud_char_M, texture_hud_char_N,
     texture_hud_char_O, texture_hud_char_P,                0x0, texture_hud_char_R,
     texture_hud_char_S, texture_hud_char_T, texture_hud_char_U, texture_hud_char_V,
@@ -10931,7 +10931,7 @@ const Texture *const main_hud_lut[] = {
     texture_hud_char_mario_head, texture_hud_char_star,    0x0,                0x0,
     texture_hud_char_apostrophe, texture_hud_char_double_quote, texture_hud_char_umlaut,
 #elif defined(VERSION_CN) || defined(VERSION_US)
-    texture_hud_char_G, texture_hud_char_H, texture_hud_char_I,                0x0,
+    texture_hud_char_G, texture_hud_char_H, texture_hud_char_I,                0x0,		// and from here
     texture_hud_char_K, texture_hud_char_L, texture_hud_char_M, texture_hud_char_N,
     texture_hud_char_O, texture_hud_char_P,                0x0, texture_hud_char_R,
     texture_hud_char_S, texture_hud_char_T, texture_hud_char_U,                0x0,
@@ -10993,7 +10993,7 @@ const Texture *const main_hud_lut[] = {
 // Main small font print table 0x02008338-0x02008737
 const Texture *const main_font_lut[] = {
 #ifdef VERSION_EU // EU Font Table
-    texture_font_char_eu_0, texture_font_char_eu_1, texture_font_char_eu_2, texture_font_char_eu_3,
+    texture_font_char_eu_0, texture_font_char_eu_1, texture_font_char_eu_2, texture_font_char_eu_3,		// also not used
     texture_font_char_eu_4, texture_font_char_eu_5, texture_font_char_eu_6, texture_font_char_eu_7,
     texture_font_char_eu_8, texture_font_char_eu_9, texture_font_char_eu_A, texture_font_char_eu_B,
     texture_font_char_eu_C, texture_font_char_eu_D, texture_font_char_eu_E, texture_font_char_eu_F,
@@ -11060,7 +11060,7 @@ const Texture *const main_font_lut[] = {
     texture_font_char_eu_star_hollow,
     0x0, 0x0,
 #elif defined(VERSION_US) || defined(VERSION_CN) // US Font Table
-    texture_font_char_us_0, texture_font_char_us_1, texture_font_char_us_2, texture_font_char_us_3,
+    texture_font_char_us_0, texture_font_char_us_1, texture_font_char_us_2, texture_font_char_us_3,		// I dont know what this is, but its not the font used
     texture_font_char_us_4, texture_font_char_us_5, texture_font_char_us_6, texture_font_char_us_7,
     texture_font_char_us_8, texture_font_char_us_9, texture_font_char_us_A, texture_font_char_us_B,
     texture_font_char_us_C, texture_font_char_us_D, texture_font_char_us_E, texture_font_char_us_F,
