@@ -326,11 +326,11 @@ void render_hud_stars(void) {
     }
 
 	if(widescreen_flag == 2){
-		print_text(GFX_DIMENSIONS_RECT_FROM_RIGHT_EDGE(HUD_STARS_X)+8, HUD_TOP_Y, "-"); // 'Star' glyph
+		print_text(GFX_DIMENSIONS_RECT_FROM_RIGHT_EDGE(HUD_STARS_X)-2+9-2, HUD_TOP_Y, "-"); // 'Star' glyph
 	}else if(widescreen_flag == 1){
-		print_text(GFX_DIMENSIONS_RECT_FROM_RIGHT_EDGE(HUD_STARS_X)+6, HUD_TOP_Y, "-"); // 'Star' glyph
+		print_text(GFX_DIMENSIONS_RECT_FROM_RIGHT_EDGE(HUD_STARS_X)-2+7-2, HUD_TOP_Y, "-"); // 'Star' glyph
     }else{
-		print_text(GFX_DIMENSIONS_RECT_FROM_RIGHT_EDGE(HUD_STARS_X)+1, HUD_TOP_Y, "-"); // 'Star' glyph
+		print_text(GFX_DIMENSIONS_RECT_FROM_RIGHT_EDGE(HUD_STARS_X)-2+2-2, HUD_TOP_Y, "-"); // 'Star' glyph
 	}
     /*if (showX == 1) {
         if(widescreen_flag == 2){
@@ -342,11 +342,14 @@ void render_hud_stars(void) {
 		}
     }*/
     if(widescreen_flag == 2){
-		print_text_fmt_int((showX * 14) + GFX_DIMENSIONS_RECT_FROM_RIGHT_EDGE(HUD_STARS_X - 16)+8, HUD_TOP_Y, "%d", gHudDisplay.stars);
+		//print_text_fmt_int((showX * 14) + GFX_DIMENSIONS_RECT_FROM_RIGHT_EDGE(HUD_STARS_X - 16)+8, HUD_TOP_Y, "%d", gHudDisplay.stars);
+		print_text_fmt_int(GFX_DIMENSIONS_RECT_FROM_RIGHT_EDGE(HUD_STARS_X)-2+17+8, HUD_TOP_Y, "%d", gHudDisplay.stars);
 	}else if(widescreen_flag == 1){
-		print_text_fmt_int((showX * 14) + GFX_DIMENSIONS_RECT_FROM_RIGHT_EDGE(HUD_STARS_X - 16)+6, HUD_TOP_Y, "%d", gHudDisplay.stars);
+		//print_text_fmt_int((showX * 14) + GFX_DIMENSIONS_RECT_FROM_RIGHT_EDGE(HUD_STARS_X - 16)+6, HUD_TOP_Y, "%d", gHudDisplay.stars);
+		print_text_fmt_int(GFX_DIMENSIONS_RECT_FROM_RIGHT_EDGE(HUD_STARS_X)-2+17+6, HUD_TOP_Y, "%d", gHudDisplay.stars);
 	}else{
-		print_text_fmt_int((showX * 14) + GFX_DIMENSIONS_RECT_FROM_RIGHT_EDGE(HUD_STARS_X - 16)+1, HUD_TOP_Y, "%d", gHudDisplay.stars);
+		//print_text_fmt_int((showX * 14) + GFX_DIMENSIONS_RECT_FROM_RIGHT_EDGE(HUD_STARS_X - 16)+1, HUD_TOP_Y, "%d", gHudDisplay.stars);
+		print_text_fmt_int(GFX_DIMENSIONS_RECT_FROM_RIGHT_EDGE(HUD_STARS_X)-2+17+1, HUD_TOP_Y, "%d", gHudDisplay.stars);
 	}
 }
 
