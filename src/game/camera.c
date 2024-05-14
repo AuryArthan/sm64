@@ -3055,7 +3055,7 @@ void update_camera(struct Camera *c) {
     else c->mode = 4;
     c->defMode = gLakituState.defMode;
 
-    //camera_course_processing(c);
+    //camera_course_processing(c); // commenting out unfortunately makes the camera act weird in some levels like Bowser1 and LLL
     stub_camera_3(c);
     sCButtonsPressed = find_c_buttons_pressed(sCButtonsPressed, gPlayer1Controller->buttonPressed,
                                               gPlayer1Controller->buttonDown);
