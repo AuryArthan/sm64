@@ -3055,7 +3055,7 @@ void update_camera(struct Camera *c) {
     else c->mode = 4;
     c->defMode = gLakituState.defMode;
 
-    //camera_course_processing(c); // commenting out unfortunately makes the camera act weird in some levels like Bowser1 and LLL
+    camera_course_processing(c);
     stub_camera_3(c);
     sCButtonsPressed = find_c_buttons_pressed(sCButtonsPressed, gPlayer1Controller->buttonPressed,
                                               gPlayer1Controller->buttonDown);
@@ -6663,11 +6663,11 @@ s16 camera_course_processing(struct Camera *c) {
 
             case AREA_DDD_WHIRLPOOL:
                 //! @bug this does nothing
-                gLakituState.defMode = CAMERA_MODE_OUTWARD_RADIAL;
+                //gLakituState.defMode = CAMERA_MODE_OUTWARD_RADIAL;
                 break;
 
             case AREA_DDD_SUB:
-                if ((c->mode != CAMERA_MODE_BEHIND_MARIO)
+                /*if ((c->mode != CAMERA_MODE_BEHIND_MARIO)
                     && (c->mode != CAMERA_MODE_WATER_SURFACE)) {
                     if (((sMarioCamState->action & ACT_FLAG_ON_POLE) != 0)
                         || (sMarioGeometry.currFloorHeight > 800.f)) {
@@ -6680,7 +6680,7 @@ s16 camera_course_processing(struct Camera *c) {
                     }
                 }
                 //! @bug this does nothing
-                gLakituState.defMode = CAMERA_MODE_FREE_ROAM;
+                gLakituState.defMode = CAMERA_MODE_FREE_ROAM;*/
                 break;
         }
     }
