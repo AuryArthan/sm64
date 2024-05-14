@@ -37,7 +37,7 @@ static s16 sPowerMeterStoredHealth;
 
 static struct PowerMeterHUD sPowerMeterHUD = {
     POWER_METER_HIDDEN,
-    33, //140,
+    34, //140,
     166,
     1.0,
 };
@@ -112,8 +112,8 @@ void render_dl_power_meter(s16 numHealthWedges) {
         return;
     }
 	
-    if(widescreen_flag == 2) guTranslate(mtx, (f32) sPowerMeterHUD.x-13, (f32) sPowerMeterHUD.y, 0);
-    else if(widescreen_flag == 1) guTranslate(mtx, (f32) sPowerMeterHUD.x-8, (f32) sPowerMeterHUD.y, 0);
+    if(widescreen_flag == 2) guTranslate(mtx, (f32) sPowerMeterHUD.x-15, (f32) sPowerMeterHUD.y, 0);
+    else if(widescreen_flag == 1) guTranslate(mtx, (f32) sPowerMeterHUD.x-9, (f32) sPowerMeterHUD.y, 0);
     else guTranslate(mtx, (f32) sPowerMeterHUD.x, (f32) sPowerMeterHUD.y, 0);
 
     gSPMatrix(gDisplayListHead++, VIRTUAL_TO_PHYSICAL(mtx++),
@@ -289,16 +289,16 @@ void render_hud_coins(void) {
     //print_text(184, HUD_TOP_Y, "*"); // 'X' glyph
     //print_text_fmt_int(198, HUD_TOP_Y, "%d", gHudDisplay.coins);
     if(widescreen_flag == 2){
-		print_text(168+hud_shift_right+23-6, HUD_TOP_Y, "+"); // 'Coin' glyph
-		print_text(184+hud_shift_right+18-3, HUD_TOP_Y, "*"); // 'X' glyph
-		print_text_fmt_int(198+hud_shift_right+13, HUD_TOP_Y, "%d", gHudDisplay.coins);
+		print_text(168+hud_shift_right+12+11, HUD_TOP_Y, "+"); // 'Coin' glyph
+		//print_text(184+hud_shift_right+18-3, HUD_TOP_Y, "*"); // 'X' glyph
+		print_text_fmt_int(198+hud_shift_right+11, HUD_TOP_Y, "%d", gHudDisplay.coins);
 	}else if(widescreen_flag == 1){
-		print_text(168+hud_shift_right+14-4, HUD_TOP_Y, "+"); // 'Coin' glyph
-		print_text(184+hud_shift_right+11-2, HUD_TOP_Y, "*"); // 'X' glyph
-		print_text_fmt_int(198+hud_shift_right+8, HUD_TOP_Y, "%d", gHudDisplay.coins);
+		print_text(168+hud_shift_right+12+7, HUD_TOP_Y, "+"); // 'Coin' glyph
+		//print_text(184+hud_shift_right+11-2, HUD_TOP_Y, "*"); // 'X' glyph
+		print_text_fmt_int(198+hud_shift_right+7, HUD_TOP_Y, "%d", gHudDisplay.coins);
     }else{
-		print_text(168+hud_shift_right, HUD_TOP_Y, "+"); // 'Coin' glyph
-		print_text(184+hud_shift_right, HUD_TOP_Y, "*"); // 'X' glyph
+		print_text(168+hud_shift_right+12, HUD_TOP_Y, "+"); // 'Coin' glyph
+		//print_text(184+hud_shift_right, HUD_TOP_Y, "*"); // 'X' glyph
 		print_text_fmt_int(198+hud_shift_right, HUD_TOP_Y, "%d", gHudDisplay.coins);
 	}
 }
@@ -332,7 +332,7 @@ void render_hud_stars(void) {
     }else{
 		print_text(GFX_DIMENSIONS_RECT_FROM_RIGHT_EDGE(HUD_STARS_X)+1, HUD_TOP_Y, "-"); // 'Star' glyph
 	}
-    if (showX == 1) {
+    /*if (showX == 1) {
         if(widescreen_flag == 2){
 			print_text(GFX_DIMENSIONS_RECT_FROM_RIGHT_EDGE(HUD_STARS_X) + 16 +7, HUD_TOP_Y, "*"); // 'X' glyph
 		}else if(widescreen_flag == 1){
@@ -340,7 +340,7 @@ void render_hud_stars(void) {
 		}else{
 			print_text(GFX_DIMENSIONS_RECT_FROM_RIGHT_EDGE(HUD_STARS_X) + 16 +1, HUD_TOP_Y, "*"); // 'X' glyph
 		}
-    }
+    }*/
     if(widescreen_flag == 2){
 		print_text_fmt_int((showX * 14) + GFX_DIMENSIONS_RECT_FROM_RIGHT_EDGE(HUD_STARS_X - 16)+8, HUD_TOP_Y, "%d", gHudDisplay.stars);
 	}else if(widescreen_flag == 1){
@@ -394,7 +394,7 @@ void render_hud_timer(void) {
 #else
     //print_text(GFX_DIMENSIONS_RECT_FROM_RIGHT_EDGE(150), 185, "TIME");
     if(widescreen_flag == 2){
-		print_text(GFX_DIMENSIONS_RECT_FROM_RIGHT_EDGE(150)+hud_shift_right+23-6, 185+hud_shift_up, "TIME");
+		print_text(GFX_DIMENSIONS_RECT_FROM_RIGHT_EDGE(150)+hud_shift_right+21-6, 185+hud_shift_up, "TIME");
 	}else if(widescreen_flag == 1){
 		print_text(GFX_DIMENSIONS_RECT_FROM_RIGHT_EDGE(150)+hud_shift_right+14-4, 185+hud_shift_up, "TIME");
     }else{
