@@ -76,6 +76,9 @@
  *
  */
 
+// global variables for this file
+f32 extra_zoom = 0;
+
 // BSS
 /**
  * Stores Lakitu's position from the last frame, used for transitioning in next_lakitu_state()
@@ -2107,6 +2110,7 @@ s16 update_default_camera(struct Camera *c) {
     } else {
         zoomDist = gCameraZoomDist;
     }
+    zoomDist += extra_zoom;
 
     if (sMarioCamState->action & ACT_FLAG_HANGING ||
         sMarioCamState->action == ACT_RIDING_HOOT) {
@@ -3058,8 +3062,21 @@ void update_camera(struct Camera *c) {
     camera_course_processing(c);
     stub_camera_3(c);
     sCButtonsPressed = find_c_buttons_pressed(sCButtonsPressed, gPlayer1Controller->buttonPressed,
+                   
                                               gPlayer1Controller->buttonDown);
-
+                                              
+	// the triggers give special camera views
+	if (gPlayer1Controller->buttonPressed & (R_TRIG | L_TRIG)) play_sound_rbutton_changed();
+	if (gPlayer1Controller->buttonDown & R_TRIG){
+		c->pos[1] = 10000;
+		extra_zoom = 1600;
+	}
+	if (gPlayer1Controller->buttonDown & L_TRIG){
+		extra_zoom = 1600;
+	}
+	if (!(gPlayer1Controller->buttonDown & (R_TRIG | L_TRIG))) extra_zoom = 0;
+	
+	
     if (c->cutscene != 0) {
         sYawSpeed = 0;
         play_cutscene(c);

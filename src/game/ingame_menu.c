@@ -2564,8 +2564,8 @@ void render_cam_and_aspect_setting(void) {
 		print_generic_string(7, 21, textCurrRatio43);
     }
     if (gPlayer1Controller->buttonPressed & L_TRIG){
-        ///widescreen_flag ^= 1;
-        widescreen_flag = (widescreen_flag+1)%3;
+        widescreen_flag ^= 1;
+        //widescreen_flag = (widescreen_flag+1)%3;
         play_sound_rbutton_changed();
     }
     gSPDisplayList(gDisplayListHead++, dl_ia_text_end);
